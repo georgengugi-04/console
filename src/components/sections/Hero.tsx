@@ -12,7 +12,7 @@ export function Hero() {
 
       <div className="container-x relative grid grid-cols-1 min-h-[100svh] items-center gap-0 pb-12 pt-28 lg:grid-cols-12 lg:pb-0 lg:pt-0">
         {/* 3D scene: sits behind copy on desktop, above it on mobile. Never blocks the actions. */}
-        <div className="pointer-events-none relative order-first -mx-[var(--gutter)] h-[46svh] min-h-[300px] lg:absolute lg:inset-0 lg:mx-0 lg:h-auto lg:w-full">
+        <div className="pointer-events-none relative order-first -mx-[var(--gutter)] h-[42svh] min-h-[300px] lg:absolute lg:inset-0 lg:mx-0 lg:h-auto lg:w-full">
           <HeroVisual className="h-full w-full" />
         </div>
 

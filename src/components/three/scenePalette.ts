@@ -66,8 +66,8 @@ export const SCENE_PALETTES: Record<Theme, ScenePalette> = {
     envIntensity: 1.5,
   },
   dark: {
-    frame: "#9fb9a8",
-    frameMetal: 1,
+    frame: "#b4cdbd",
+    frameMetal: 0.6,
     plate: "#7e9d89",
     plateOpacity: 0.28,
     swoosh: "#cfe0d4",
@@ -94,6 +94,6 @@ export const SCENE_PALETTES: Record<Theme, ScenePalette> = {
     lights: { key: "#dbe8de", wash: "#7e9d89", ring: "#ffffff", low: "#a7c4af", keyI: 4, washI: 2.6, ringI: 2.2, lowI: 1.4 },
     sparkle: "#a7c4af",
     sparkleOpacity: 0.4,
-    envIntensity: 1.1,
+    envIntensity: 1.5,
   },
 };

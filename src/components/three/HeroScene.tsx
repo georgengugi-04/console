@@ -324,7 +324,7 @@ type Props = { theme: Theme; active: boolean; reduced: boolean; compact: boolean
 /** Side-by-side layout: push the whole composition into the right-hand ~58% of the viewport. */
 function Stage({ wide, children }: { wide: boolean; children: React.ReactNode }) {
   const viewportWidth = useThree((s) => s.viewport.width);
-  return <group position={[wide ? viewportWidth * 0.2 : 0, 0, 0]}>{children}</group>;
+  return <group position={[wide ? viewportWidth * 0.15 : 0, 0, 0]}>{children}</group>;
 }
 
 /** Aim the camera slightly down at the shield so the boundary ring reads as an ellipse, not a flat line. */
@@ -342,7 +342,7 @@ export default function HeroScene({ theme, active, reduced, compact, wide, onRea
   return (
     <Canvas
       dpr={compact ? [1, 1.25] : [1, 1.5]}
-      camera={{ position: [0, compact ? 1.2 : 2.1, compact ? 13.5 : 12.6], fov: 32 }}
+      camera={{ position: [0, compact ? 1.6 : 2.1, compact ? 11.2 : 12.6], fov: 32 }}
       gl={{ antialias: !compact, alpha: true, powerPreference: "high-performance" }}
       frameloop={reduced ? "demand" : active ? "always" : "never"}
       onCreated={({ gl }) => {
@@ -373,7 +373,7 @@ export default function HeroScene({ theme, active, reduced, compact, wide, onRea
             <Shield p={p} />
             <Pillars count={compact ? 28 : 56} radius={radius} instant={reduced} p={p} />
             <Rings radius={radius} p={p} />
-            {!compact && <LifeObjects radius={radius} p={p} />}
+            <LifeObjects radius={radius} p={p} />
           </group>
         </Rig>
       </Stage>
