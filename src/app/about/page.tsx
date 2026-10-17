@@ -47,10 +47,10 @@ export default function AboutPage() {
 
         <div className="container-x mt-20 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line md:grid-cols-3">
           {pillars.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.1} className="bg-ink-900 p-8 sm:p-10">
-              <p className="font-display text-sm tracking-[0.2em] text-electric-300">0{i + 1}</p>
+            <Reveal key={p.title} delay={i * 0.1} className="bg-sunken p-8 sm:p-10">
+              <p className="font-display text-sm tracking-[0.2em] text-brand">0{i + 1}</p>
               <h3 className="h3 mt-6">{p.title}</h3>
-              <p className="mt-3 text-mist">{p.body}</p>
+              <p className="mt-3 text-fg-2">{p.body}</p>
             </Reveal>
           ))}
         </div>

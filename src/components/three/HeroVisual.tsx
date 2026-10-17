@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useReducedMotion } from "motion/react";
+import { currentTheme, subscribeTheme, type Theme } from "@/lib/theme";
 import { ShieldFallback } from "./ShieldFallback";
 
 const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
@@ -66,6 +67,7 @@ export function HeroVisual({ className = "" }: { className?: string }) {
   const cap = useSyncExternalStore(noopSubscribe, detect, () => "pending" as Capability);
   const compact = useSyncExternalStore(subscribeCompact, getCompact, () => false);
   const wide = useSyncExternalStore(subscribeWide, getWide, () => false);
+  const theme = useSyncExternalStore(subscribeTheme, currentTheme, () => "light" as Theme);
 
   useEffect(() => {
     const el = wrap.current;
@@ -87,6 +89,7 @@ export function HeroVisual({ className = "" }: { className?: string }) {
       {use3d && (
         <div className={`absolute inset-0 transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}>
           <HeroScene
+            theme={theme}
             active={visible}
             reduced={reduced}
             compact={compact}

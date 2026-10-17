@@ -9,7 +9,7 @@ export function Placeholder({ children, className = "" }: { children: ReactNode;
   if (process.env.NEXT_PUBLIC_SHOW_PLACEHOLDERS === "false") return null;
   return (
     <span
-      className={`inline-block rounded-md border border-dashed border-electric-400/50 bg-electric-400/5 px-2 py-0.5 text-[0.72rem] font-medium tracking-wide text-electric-300 ${className}`}
+      className={`inline-block rounded-md border border-dashed border-brand/50 bg-brand-soft px-2 py-0.5 text-[0.72rem] font-medium tracking-wide text-brand ${className}`}
     >
       Placeholder · {children}
     </span>

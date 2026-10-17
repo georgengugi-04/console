@@ -121,7 +121,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
           <motion.div
             key="transition-overlay"
             aria-hidden
-            className="fixed inset-0 z-[90] flex items-center justify-center overflow-hidden bg-ink-950"
+            className="fixed inset-0 z-[90] flex items-center justify-center overflow-hidden bg-page"
             style={{ willChange: "clip-path" }}
             initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
             animate={
@@ -147,12 +147,12 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
                 />
                 <defs>
                   <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#7cc0ff" />
-                    <stop offset="1" stopColor="#2563ff" />
+                    <stop offset="0" style={{ stopColor: "var(--color-swoosh-b)" }} />
+                    <stop offset="1" style={{ stopColor: "var(--color-brand)" }} />
                   </linearGradient>
                 </defs>
               </svg>
-              <p className="font-display text-[clamp(1.4rem,1rem+2.4vw,2.6rem)] font-medium leading-tight tracking-[-0.025em] text-snow">
+              <p className="font-display text-[clamp(1.4rem,1rem+2.4vw,2.6rem)] font-medium leading-tight tracking-[-0.025em] text-fg">
                 {words.map((w, i) => (
                   <span key={`${message}-${i}`} className="inline-block overflow-hidden pb-[0.1em] align-bottom">
                     <motion.span

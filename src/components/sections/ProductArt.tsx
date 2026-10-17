@@ -40,12 +40,12 @@ const paths: Record<ProductSlug, { main: string[]; accent: string[] }> = {
   },
 };
 
-export function ProductArt({ slug, accent, className = "" }: { slug: ProductSlug; accent: string; className?: string }) {
+export function ProductArt({ slug, className = "" }: { slug: ProductSlug; className?: string }) {
   const art = paths[slug];
   return (
     <svg viewBox="0 0 200 220" fill="none" aria-hidden className={className}>
       <motion.g
-        stroke="#e8f0ff"
+        className="stroke-fg"
         strokeWidth="2.6"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -63,7 +63,7 @@ export function ProductArt({ slug, accent, className = "" }: { slug: ProductSlug
         ))}
       </motion.g>
       <motion.g
-        stroke={accent}
+        className="stroke-swoosh-a"
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"

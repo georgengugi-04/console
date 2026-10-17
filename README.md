@@ -50,6 +50,7 @@ Skip the intro while developing with `?nointro=1`.
 ## More
 
 - `docs/ARCHITECTURE.md` — structure, the intro/transition/3D design decisions, form pipeline
+- `docs/DESIGN-SYSTEM.md` — colour tokens, light/dark theming, how to change the palette
 - `docs/DEPLOYMENT.md` — environment variables, hosting, security headers, rate-limit caveats
 - `docs/CONTENT-AUDIT.md` — what `koo.zip` contained, what was reused, what was not
 - `docs/HANDOVER.md` — decisions and information still needed from CONSOLE

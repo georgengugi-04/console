@@ -32,13 +32,13 @@ export default function ContactPage() {
           <div className="space-y-5 lg:col-span-5">
             {cards.map((c, i) => (
               <Reveal key={c.label} delay={i * 0.07} className="surface flex items-start gap-5 p-6">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-cobalt-500/20 text-electric-300">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-soft text-brand">
                   <c.icon size={20} aria-hidden />
                 </span>
                 <div className="min-w-0">
-                  <p className="text-xs uppercase tracking-[0.2em] text-steel">{c.label}</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-fg-muted">{c.label}</p>
                   {c.href ? (
-                    <a href={c.href} className="mt-1 block break-all text-lg font-semibold hover:text-electric-300 sm:break-words">
+                    <a href={c.href} className="mt-1 block break-all text-lg font-semibold hover:text-brand sm:break-words">
                       {c.value}
                     </a>
                   ) : (
@@ -49,9 +49,9 @@ export default function ContactPage() {
             ))}
 
             <Reveal delay={0.25} className="surface overflow-hidden">
-              <div className="relative grid h-40 place-items-center bg-[radial-gradient(70%_90%_at_50%_100%,rgba(37,99,255,0.35),transparent)]">
+              <div className="relative grid h-40 place-items-center bg-sunken">
                 <div aria-hidden className="grid-lines absolute inset-0 opacity-70" />
-                <MapPin size={34} className="relative text-electric-300" aria-hidden />
+                <MapPin size={34} className="relative text-brand" aria-hidden />
               </div>
               <div className="p-6">
                 <p className="font-semibold">{address.value}</p>
@@ -59,18 +59,18 @@ export default function ContactPage() {
                   href={mapsSearchUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-electric-300"
+                  className="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-brand"
                 >
                   Open area in Maps <ArrowUpRight size={16} aria-hidden />
                 </a>
-                <p className="mt-3 text-xs text-steel">
+                <p className="mt-3 text-xs text-fg-muted">
                   <Placeholder>exact street location / map pin and opening hours to be supplied</Placeholder>
                 </p>
               </div>
             </Reveal>
 
-            <Reveal delay={0.3} className="rounded-2xl border border-line p-6 text-sm text-mist">
-              <h2 className="font-semibold text-snow">After you send an enquiry</h2>
+            <Reveal delay={0.3} className="rounded-2xl border border-line p-6 text-sm text-fg-2">
+              <h2 className="font-semibold text-fg">After you send an enquiry</h2>
               <ol className="mt-3 list-decimal space-y-1.5 pl-5">
                 <li>Your message goes to the CONSOLE team.</li>
                 <li>A team member reads it and replies using the email you provided.</li>

@@ -38,9 +38,9 @@ export default function ResourcesPage() {
               <details key={f.q} className="group py-5">
                 <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 font-semibold marker:hidden">
                   {f.q}
-                  <span aria-hidden className="text-electric-300 transition group-open:rotate-45">+</span>
+                  <span aria-hidden className="text-brand transition group-open:rotate-45">+</span>
                 </summary>
-                <p className="mt-3 max-w-2xl text-mist">{f.a}</p>
+                <p className="mt-3 max-w-2xl text-fg-2">{f.a}</p>
               </details>
             ))}
           </div>

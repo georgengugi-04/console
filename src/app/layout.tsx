@@ -8,6 +8,7 @@ import { IntroGate } from "@/components/intro/IntroGate";
 import { TransitionProvider } from "@/components/transition/TransitionProvider";
 import { company, siteUrl } from "@/content/company";
 import { introHeadScript } from "@/lib/introStore";
+import { THEME_COLORS, themeHeadScript } from "@/lib/theme";
 
 /**
  * Fonts are self-hosted (no third-party requests) and loaded through next/font, which preloads them and
@@ -30,8 +31,6 @@ const sans = localFont({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#02050d",
-  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -59,6 +58,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-KE" suppressHydrationWarning className={`${display.variable} ${sans.variable}`}>
       <head>
+        {/* Theme: resolved before first paint (stored choice → OS preference → light). See lib/theme.ts */}
+        <meta name="color-scheme" content="light dark" />
+        <meta id="theme-color" name="theme-color" content={THEME_COLORS.light} />
+        <script dangerouslySetInnerHTML={{ __html: themeHeadScript }} />
         {/* First-visit flag: prevents a flash of the page before the one-time intro mounts. See lib/introStore.ts */}
         <script dangerouslySetInnerHTML={{ __html: introHeadScript }} />
         <noscript>
@@ -69,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionConfig reducedMotion="user">
           <a
             href="#main"
-            className="sr-only-focusable fixed left-4 top-4 z-[300] rounded-full bg-cobalt-500 px-5 py-3 text-sm font-semibold text-white"
+            className="sr-only-focusable fixed left-4 top-4 z-[300] rounded-full bg-brand px-5 py-3 text-sm font-semibold text-brand-fg"
           >
             Skip to content
           </a>

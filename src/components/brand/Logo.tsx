@@ -24,13 +24,12 @@ export function LogoSymbol({ className, title = "CONSOLE INSURANCE", decorative 
     >
       <defs>
         <linearGradient id={`sw-${uid}`} x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stopColor="#1747d6" />
-          <stop offset="0.55" stopColor="#2f86ff" />
-          <stop offset="1" stopColor="#7cc0ff" />
+          <stop offset="0" style={{ stopColor: "var(--color-swoosh-a)" }} />
+          <stop offset="1" style={{ stopColor: "var(--color-swoosh-b)" }} />
         </linearGradient>
         <linearGradient id={`sh-${uid}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#b9c9ee" />
+          <stop offset="0" style={{ stopColor: "var(--color-mark-a)" }} />
+          <stop offset="1" style={{ stopColor: "var(--color-mark-b)" }} />
         </linearGradient>
         <mask id={`cut-${uid}`} maskUnits="userSpaceOnUse" x="-10" y="-10" width="130" height="130">
           <rect x="-10" y="-10" width="130" height="130" fill="#fff" />
@@ -64,10 +63,10 @@ export function Logo({ className = "", variant = "full", showTagline = false }: 
     <span className={`inline-flex items-center gap-3 ${className}`}>
       <LogoSymbol decorative className="h-9 w-auto shrink-0" />
       <span className="flex flex-col leading-none">
-        <span className="font-display text-[1.15rem] font-semibold tracking-[-0.02em] text-snow">CONSOLE</span>
-        <span className="mt-[0.3rem] text-[0.62rem] font-semibold tracking-[0.5em] text-electric-400">INSURANCE</span>
+        <span className="font-display text-[1.15rem] font-semibold tracking-[-0.02em] text-fg">CONSOLE</span>
+        <span className="mt-[0.3rem] text-[0.62rem] font-semibold tracking-[0.5em] text-brand">INSURANCE</span>
         {showTagline && (
-          <span className="mt-2 text-[0.6rem] tracking-[0.28em] text-steel">YOUR TOMORROW, OUR PRIORITY</span>
+          <span className="mt-2 text-[0.6rem] tracking-[0.28em] text-fg-muted">YOUR TOMORROW, OUR PRIORITY</span>
         )}
       </span>
       <span className="sr-only">CONSOLE INSURANCE</span>

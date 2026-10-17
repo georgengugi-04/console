@@ -124,19 +124,19 @@ export function QuoteForm({ initialProduct }: { initialProduct?: QuoteProductCho
                 <span
                   className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border text-xs font-semibold transition-colors ${
                     done
-                      ? "border-cobalt-400 bg-cobalt-500 text-white"
+                      ? "border-brand bg-brand text-brand-fg"
                       : current
-                        ? "border-electric-300 text-white"
-                        : "border-line-strong text-steel"
+                        ? "border-brand text-fg"
+                        : "border-line-strong text-fg-muted"
                   }`}
                 >
                   {done ? <Check size={14} aria-hidden /> : s.n}
                 </span>
-                <span className={`hidden text-sm sm:block ${current ? "text-white" : "text-steel"}`}>{s.label}</span>
+                <span className={`hidden text-sm sm:block ${current ? "text-fg" : "text-fg-muted"}`}>{s.label}</span>
                 {i < STEPS.length - 1 && (
                   <span className="relative ml-1 h-px flex-1 overflow-hidden bg-line">
                     <motion.span
-                      className="absolute inset-0 origin-left bg-electric-300"
+                      className="absolute inset-0 origin-left bg-brand"
                       initial={false}
                       animate={{ scaleX: done ? 1 : 0 }}
                       transition={{ duration: 0.5, ease: ease.out }}
@@ -166,15 +166,15 @@ export function QuoteForm({ initialProduct }: { initialProduct?: QuoteProductCho
               <h2 ref={headingRef} tabIndex={-1} className="h3 outline-none">
                 What would you like cover for?
               </h2>
-              <p className="mt-2 text-sm text-mist">Pick one for now — you can mention others later.</p>
+              <p className="mt-2 text-sm text-fg-2">Pick one for now — you can mention others later.</p>
               <div className="mt-8 grid gap-3 sm:grid-cols-2" role="radiogroup" aria-describedby={errors.product ? "product-error" : undefined}>
                 {availableProducts.map((p) => {
                   const checked = product === p.slug;
                   return (
                     <label
                       key={p.slug}
-                      className={`relative flex min-h-24 cursor-pointer flex-col justify-center rounded-2xl border p-5 transition has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-electric-300 ${
-                        checked ? "border-electric-300 bg-cobalt-500/15" : "border-line bg-ink-850/60 hover:border-line-strong"
+                      className={`relative flex min-h-24 cursor-pointer flex-col justify-center rounded-2xl border p-5 transition has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring ${
+                        checked ? "border-brand bg-brand-soft" : "border-line bg-page hover:border-line-strong"
                       }`}
                     >
                       <input
@@ -183,12 +183,12 @@ export function QuoteForm({ initialProduct }: { initialProduct?: QuoteProductCho
                         className="sr-only"
                         {...register("product")}
                       />
-                      <span className="font-display text-xs tracking-[0.2em]" style={{ color: p.accent }}>
+                      <span className="font-display text-xs tracking-[0.2em] text-brand">
                         {p.code}
                       </span>
                       <span className="mt-1 font-semibold">{p.name}</span>
-                      <span className="mt-0.5 text-sm text-steel">{p.short}</span>
-                      {checked && <Check size={18} aria-hidden className="absolute right-4 top-4 text-electric-300" />}
+                      <span className="mt-0.5 text-sm text-fg-muted">{p.short}</span>
+                      {checked && <Check size={18} aria-hidden className="absolute right-4 top-4 text-brand" />}
                     </label>
                   );
                 })}
@@ -242,14 +242,14 @@ export function QuoteForm({ initialProduct }: { initialProduct?: QuoteProductCho
                 />
               </Field>
               <fieldset>
-                <legend className="mb-2 text-sm font-semibold text-silver">Preferred way to be contacted</legend>
+                <legend className="mb-2 text-sm font-semibold text-fg-2">Preferred way to be contacted</legend>
                 <div className="flex gap-3">
                   {(["phone", "email"] as const).map((c) => (
                     <label
                       key={c}
-                      className="flex min-h-12 flex-1 cursor-pointer items-center gap-3 rounded-xl border border-line-strong bg-ink-850/70 px-4 has-[:checked]:border-electric-300 has-[:checked]:bg-cobalt-500/15 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-electric-300"
+                      className="flex min-h-12 flex-1 cursor-pointer items-center gap-3 rounded-xl border border-field-line bg-field px-4 has-[:checked]:border-brand has-[:checked]:bg-brand-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring"
                     >
-                      <input type="radio" value={c} className="accent-[#4da3ff]" {...register("preferredContact")} />
+                      <input type="radio" value={c} className="accent-brand" {...register("preferredContact")} />
                       <span className="capitalize">{c === "phone" ? "Phone call" : "Email"}</span>
                     </label>
                   ))}
@@ -287,27 +287,27 @@ export function QuoteForm({ initialProduct }: { initialProduct?: QuoteProductCho
                 />
               </Field>
 
-              <div className="rounded-2xl border border-line bg-ink-850/60 p-5 text-sm">
-                <p className="font-semibold text-silver">Please check your details</p>
+              <div className="rounded-2xl border border-line bg-page p-5 text-sm">
+                <p className="font-semibold text-fg-2">Please check your details</p>
                 <dl className="mt-3 grid gap-x-6 gap-y-1 sm:grid-cols-[auto_1fr]">
-                  <dt className="text-steel">Cover</dt>
+                  <dt className="text-fg-muted">Cover</dt>
                   <dd>{selected?.name ?? "—"}</dd>
-                  <dt className="text-steel">Name</dt>
+                  <dt className="text-fg-muted">Name</dt>
                   <dd>{values.fullName || "—"}</dd>
-                  <dt className="text-steel">Email</dt>
+                  <dt className="text-fg-muted">Email</dt>
                   <dd className="break-all">{values.email || "—"}</dd>
-                  <dt className="text-steel">Phone</dt>
+                  <dt className="text-fg-muted">Phone</dt>
                   <dd>{values.phone || "—"}</dd>
-                  <dt className="text-steel">Contact by</dt>
+                  <dt className="text-fg-muted">Contact by</dt>
                   <dd>{values.preferredContact === "email" ? "Email" : "Phone call"}</dd>
                 </dl>
               </div>
 
               <div>
-                <label className="flex cursor-pointer items-start gap-3 text-sm text-mist">
+                <label className="flex cursor-pointer items-start gap-3 text-sm text-fg-2">
                   <input
                     type="checkbox"
-                    className="mt-1 h-5 w-5 shrink-0 accent-[#4da3ff]"
+                    className="mt-1 h-5 w-5 shrink-0 accent-brand"
                     aria-invalid={Boolean(errors.consent)}
                     aria-describedby={errors.consent ? "consent-error" : undefined}
                     {...register("consent")}
@@ -315,7 +315,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: QuoteProductCho
                   <span>
                     I agree that CONSOLE INSURANCE may use these details to contact me about this enquiry, as described
                     in the{" "}
-                    <a href="/privacy" className="text-electric-300 underline underline-offset-4" target="_blank" rel="noopener">
+                    <a href="/privacy" className="text-brand underline underline-offset-4" target="_blank" rel="noopener">
                       privacy notice
                     </a>
                     .

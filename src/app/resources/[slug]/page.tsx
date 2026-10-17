@@ -28,15 +28,15 @@ export default async function ResourcePage({ params }: { params: Promise<Params>
     <>
       <article className="atmosphere pt-36">
         <div className="container-x max-w-3xl pb-20">
-          <Link href="/resources" className="inline-flex min-h-11 items-center gap-2 text-sm text-mist transition hover:text-white">
+          <Link href="/resources" className="inline-flex min-h-11 items-center gap-2 text-sm text-fg-2 transition hover:text-fg">
             <ArrowLeft size={16} aria-hidden /> All resources
           </Link>
           <p className="eyebrow mt-8">{r.category}</p>
           <h1 className="h1 mt-4 text-balance">{r.title}</h1>
-          <p className="mt-4 text-sm text-steel">{r.readingMinutes} min read</p>
+          <p className="mt-4 text-sm text-fg-muted">{r.readingMinutes} min read</p>
 
           {r.status === "draft" && (
-            <p className="mt-8 rounded-xl border border-dashed border-electric-400/50 bg-electric-400/5 p-4 text-sm text-electric-300">
+            <p className="mt-8 rounded-xl border border-dashed border-brand/50 bg-brand-soft p-4 text-sm text-brand">
               Draft content — general information pending review by CONSOLE. Not advice, and not a statement of any
               insurer&apos;s terms.
             </p>
@@ -54,7 +54,7 @@ export default async function ResourcePage({ params }: { params: Promise<Params>
               <ul className="mt-4 space-y-2">
                 {related.map((x) => (
                   <li key={x.slug}>
-                    <Link href={`/resources/${x.slug}`} className="text-electric-300 underline underline-offset-4">
+                    <Link href={`/resources/${x.slug}`} className="text-brand underline underline-offset-4">
                       {x.title}
                     </Link>
                   </li>

@@ -9,6 +9,7 @@ import { Logo } from "@/components/brand/Logo";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { ease } from "@/components/motion/tokens";
 import { LinkButton, buttonClass } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { nav } from "@/content/site";
 
 function isActive(pathname: string, href: string) {
@@ -69,7 +70,7 @@ export function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,border-color,height] duration-500 ${
-        scrolled || open ? "border-b border-line bg-ink-950/75 backdrop-blur-xl" : "border-b border-transparent bg-transparent"
+        scrolled || open ? "border-b border-line bg-page/85 backdrop-blur-xl" : "border-b border-transparent bg-transparent"
       }`}
     >
       <div
@@ -96,14 +97,14 @@ export function Header() {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={`relative block rounded-full px-4 py-2 text-[0.92rem] font-medium transition-colors ${
-                      active ? "text-white" : "text-mist hover:text-white"
+                      active ? "text-fg" : "text-fg-2 hover:text-fg"
                     }`}
                   >
                     {item.label}
                     {active && (
                       <motion.span
                         layoutId="nav-active"
-                        className="absolute inset-x-4 -bottom-0.5 h-px bg-gradient-to-r from-transparent via-electric-300 to-transparent"
+                        className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-brand"
                         transition={{ duration: 0.5, ease: ease.out }}
                       />
                     )}
@@ -114,7 +115,8 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="relative z-[60] flex items-center gap-3">
+        <div className="relative z-[60] flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
           <div className="hidden lg:block">
             <Magnetic>
               <LinkButton href="/quote" className="min-h-11 px-5 text-sm">
@@ -125,7 +127,7 @@ export function Header() {
           <button
             ref={toggleRef}
             type="button"
-            className="grid h-12 w-12 place-items-center rounded-full border border-line-strong text-snow transition hover:border-electric-300 lg:hidden"
+            className="grid h-12 w-12 place-items-center rounded-full border border-field-line text-fg transition hover:bg-brand-soft lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -144,7 +146,7 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label="Site menu"
-            className="fixed inset-0 z-[55] flex flex-col bg-ink-950 px-[var(--gutter)] pb-10 pt-28 lg:hidden"
+            className="fixed inset-0 z-[55] flex flex-col bg-page px-[var(--gutter)] pb-10 pt-28 lg:hidden"
             initial={{ clipPath: "inset(0 0 100% 0)" }}
             animate={{ clipPath: "inset(0 0 0% 0)" }}
             exit={{ clipPath: "inset(0 0 100% 0)" }}
@@ -166,11 +168,11 @@ export function Header() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={`flex min-h-16 items-center justify-between font-display text-2xl tracking-[-0.02em] ${
-                        active ? "text-white" : "text-silver"
+                        active ? "text-fg" : "text-fg-2"
                       }`}
                     >
                       {item.label}
-                      <span aria-hidden className="text-electric-300">
+                      <span aria-hidden className="text-brand">
                         {active ? "●" : "→"}
                       </span>
                     </Link>

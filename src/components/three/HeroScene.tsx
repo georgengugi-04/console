@@ -4,10 +4,12 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, Sparkles } from "@react-three/drei";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import type { Theme } from "@/lib/theme";
+import { SCENE_PALETTES, type ScenePalette } from "./scenePalette";
 
 /**
  * CONSOLE hero scene — an abstract protection concept.
- *   • a sculpted open shield (extruded, bevelled, chrome-blue) crossed by a luminous swoosh (the brand mark, in 3D)
+ *   • a sculpted open shield (extruded, bevelled, forest-metal) crossed by a luminous swoosh (the brand mark, in 3D)
  *   • a ring of slender pillars that rises around it — a protective boundary / architecture
  *   • four small objects orbiting the boundary: house, vehicle, person, health cross
  * Rendering budget: ≤ 1 draw call per pillar group (instanced), no postprocessing pass, procedural reflections
@@ -54,7 +56,7 @@ function usePointer(enabled: boolean) {
 }
 
 /* ── shield ──────────────────────────────────────────────────── */
-function Shield() {
+function Shield({ p }: { p: ScenePalette }) {
   const frame = useDisposable(
     () => {
       const outer = shieldShape(1);
@@ -89,20 +91,20 @@ function Shield() {
   return (
     <group position={[0, 0, -0.17]}>
       <mesh geometry={frame}>
-        <meshPhysicalMaterial color="#9db8ff" metalness={1} roughness={0.24} clearcoat={1} clearcoatRoughness={0.12} envMapIntensity={1.15} />
+        <meshPhysicalMaterial color={p.frame} metalness={p.frameMetal} roughness={0.24} clearcoat={1} clearcoatRoughness={0.12} envMapIntensity={p.envIntensity} />
       </mesh>
       <mesh geometry={plate} position={[0, 0, 0.15]}>
-        <meshPhysicalMaterial color="#1b4fd8" transparent opacity={0.34} roughness={0.15} metalness={0.1} emissive="#1747d6" emissiveIntensity={0.35} />
+        <meshPhysicalMaterial color={p.plate} transparent opacity={p.plateOpacity} roughness={0.15} metalness={0.1} />
       </mesh>
       <mesh geometry={swoosh} position={[0, 0, 0.26]}>
-        <meshStandardMaterial color="#2a6df0" emissive="#1d5bff" emissiveIntensity={1.15} roughness={0.3} metalness={0.2} />
+        <meshStandardMaterial color={p.swoosh} emissive={p.swooshEmissive} emissiveIntensity={p.swooshGlow} roughness={0.3} metalness={0.2} />
       </mesh>
     </group>
   );
 }
 
 /* ── protective boundary: instanced pillars that rise on load ── */
-function Pillars({ count, radius, instant }: { count: number; radius: number; instant: boolean }) {
+function Pillars({ count, radius, instant, p }: { count: number; radius: number; instant: boolean; p: ScenePalette }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const invalidate = useThree((s) => s.invalidate);
   const dummy = useMemo(() => new THREE.Object3D(), []);
@@ -132,17 +134,16 @@ function Pillars({ count, radius, instant }: { count: number; radius: number; in
     const m = mesh.current;
     if (!m) return;
     const c = new THREE.Color();
+    const hi = new THREE.Color(p.pillarB);
     for (let i = 0; i < count; i++) {
-      c.set("#1747d6").lerp(new THREE.Color("#7cc0ff"), (heights[i]! - 0.3) / 0.7);
+      c.set(p.pillarA).lerp(hi, (heights[i]! - 0.3) / 0.7);
       m.setColorAt(i, c);
     }
     if (m.instanceColor) m.instanceColor.needsUpdate = true;
-    if (instant) {
-      apply(99);
-      invalidate();
-    }
+    if (instant) apply(99);
+    invalidate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count, instant]);
+  }, [count, instant, p]);
 
   const done = useRef(false);
   useFrame((state) => {
@@ -155,35 +156,44 @@ function Pillars({ count, radius, instant }: { count: number; radius: number; in
   return (
     <instancedMesh ref={mesh} args={[undefined, undefined, count]} frustumCulled={false}>
       <boxGeometry args={[0.05, 1, 0.05]} />
-      <meshStandardMaterial color="#ffffff" emissive="#2563ff" emissiveIntensity={0.9} roughness={0.35} metalness={0.4} toneMapped={false} />
+      <meshStandardMaterial color="#ffffff" emissive={p.pillarEmissive} emissiveIntensity={p.pillarGlow} roughness={0.35} metalness={0.4} />
     </instancedMesh>
   );
 }
 
-function Rings({ radius }: { radius: number }) {
+function Rings({ radius, p }: { radius: number; p: ScenePalette }) {
   return (
     <group>
       <mesh rotation-x={Math.PI / 2} position={[0, -1.55, 0]}>
         <torusGeometry args={[radius, 0.012, 8, 160]} />
-        <meshBasicMaterial color="#4da3ff" toneMapped={false} transparent opacity={0.9} />
+        <meshBasicMaterial color={p.ringA} toneMapped={false} transparent opacity={0.85} />
       </mesh>
       <mesh rotation-x={Math.PI / 2} position={[0, -1.55, 0]}>
         <torusGeometry args={[radius * 1.28, 0.006, 8, 160]} />
-        <meshBasicMaterial color="#2563ff" toneMapped={false} transparent opacity={0.45} />
+        <meshBasicMaterial color={p.ringB} toneMapped={false} transparent opacity={0.45} />
       </mesh>
     </group>
   );
 }
 
 /* ── orbiting life objects (all primitives, shared materials) ── */
-function LifeObjects({ radius }: { radius: number }) {
+function LifeObjects({ radius, p }: { radius: number; p: ScenePalette }) {
+  const invalidate = useThree((s) => s.invalidate);
   const orbit = useRef<THREE.Group>(null);
   const body = useDisposable(
-    () => new THREE.MeshPhysicalMaterial({ color: "#e4ecff", roughness: 0.32, metalness: 0.25, clearcoat: 0.7, emissive: "#2563ff", emissiveIntensity: 0.12 }),
+    () => new THREE.MeshPhysicalMaterial({ color: p.body, roughness: 0.32, metalness: 0.25, clearcoat: 0.7 }),
   );
   const accent = useDisposable(
-    () => new THREE.MeshStandardMaterial({ color: "#7cc0ff", emissive: "#2f86ff", emissiveIntensity: 1.6, toneMapped: false }),
+    () => new THREE.MeshStandardMaterial({ color: p.accent, emissive: p.accentEmissive, emissiveIntensity: p.accentGlow }),
   );
+  // Materials are created once; recolour them (not recreate) when the theme changes.
+  useEffect(() => {
+    body.color.set(p.body);
+    accent.color.set(p.accent);
+    accent.emissive.set(p.accentEmissive);
+    accent.setValues({ emissiveIntensity: p.accentGlow });
+    invalidate();
+  }, [p, body, accent, invalidate]);
 
   useFrame((state, dt) => {
     if (!orbit.current) return;
@@ -262,23 +272,30 @@ function LifeObjects({ radius }: { radius: number }) {
 }
 
 /* ── soft glow behind the shield (cheap stand-in for bloom) ──── */
-function Glow() {
-  const tex = useDisposable(() => {
+function Glow({ p }: { p: ScenePalette }) {
+  const tex = useMemo(() => {
     const c = document.createElement("canvas");
     c.width = c.height = 256;
     const g = c.getContext("2d")!;
     const grad = g.createRadialGradient(128, 128, 0, 128, 128, 128);
-    grad.addColorStop(0, "rgba(77,163,255,0.85)");
-    grad.addColorStop(0.35, "rgba(37,99,255,0.32)");
-    grad.addColorStop(1, "rgba(37,99,255,0)");
+    grad.addColorStop(0, p.glowInner);
+    grad.addColorStop(1, p.glowOuter);
     g.fillStyle = grad;
     g.fillRect(0, 0, 256, 256);
     return new THREE.CanvasTexture(c);
-  });
+  }, [p]);
+  useEffect(() => () => tex.dispose(), [tex]);
   return (
     <mesh position={[0, 0, -1.6]} scale={8}>
       <planeGeometry args={[1, 1]} />
-      <meshBasicMaterial map={tex} transparent depthWrite={false} blending={THREE.AdditiveBlending} opacity={0.5} toneMapped={false} />
+      <meshBasicMaterial
+        map={tex}
+        transparent
+        depthWrite={false}
+        blending={p.glowAdditive ? THREE.AdditiveBlending : THREE.NormalBlending}
+        opacity={p.glowOpacity}
+        toneMapped={false}
+      />
     </mesh>
   );
 }
@@ -302,7 +319,7 @@ function Rig({ reduced, compact, children }: { reduced: boolean; compact: boolea
   return <group ref={group}>{children}</group>;
 }
 
-type Props = { active: boolean; reduced: boolean; compact: boolean; wide: boolean; onReady: () => void; onLost: () => void };
+type Props = { theme: Theme; active: boolean; reduced: boolean; compact: boolean; wide: boolean; onReady: () => void; onLost: () => void };
 
 /** Side-by-side layout: push the whole composition into the right-hand ~58% of the viewport. */
 function Stage({ wide, children }: { wide: boolean; children: React.ReactNode }) {
@@ -319,8 +336,9 @@ function Aim() {
   return null;
 }
 
-export default function HeroScene({ active, reduced, compact, wide, onReady, onLost }: Props) {
+export default function HeroScene({ theme, active, reduced, compact, wide, onReady, onLost }: Props) {
   const radius = 2.7;
+  const p = SCENE_PALETTES[theme];
   return (
     <Canvas
       dpr={compact ? [1, 1.25] : [1, 1.5]}
@@ -337,29 +355,29 @@ export default function HeroScene({ active, reduced, compact, wide, onReady, onL
       }}
       aria-hidden
     >
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[3, 4, 5]} intensity={1.4} color="#cfe3ff" />
-      <pointLight position={[-4, -1, 3]} intensity={18} color="#2563ff" />
-      <Environment resolution={256} frames={1}>
-        <Lightformer form="rect" intensity={4.5} color="#a7ceff" position={[-4, 3, 4]} scale={[7, 3, 1]} />
-        <Lightformer form="rect" intensity={3.2} color="#2f6bff" position={[5, 0.5, -3]} rotation-y={Math.PI / 2} scale={[6, 6, 1]} />
-        <Lightformer form="ring" intensity={2.4} color="#ffffff" position={[0, 5, 0]} rotation-x={Math.PI / 2} scale={4} />
-        <Lightformer form="rect" intensity={1.6} color="#4da3ff" position={[0, -3, 3]} scale={[8, 1, 1]} />
+      <ambientLight intensity={p.ambient} />
+      <directionalLight position={[3, 4, 5]} intensity={1.4} color={p.key} />
+      <pointLight position={[-4, -1, 3]} intensity={p.fillIntensity} color={p.fill} />
+      <Environment key={theme} resolution={256} frames={1}>
+        <Lightformer form="rect" intensity={p.lights.keyI} color={p.lights.key} position={[-4, 3, 4]} scale={[7, 3, 1]} />
+        <Lightformer form="rect" intensity={p.lights.washI} color={p.lights.wash} position={[5, 0.5, -3]} rotation-y={Math.PI / 2} scale={[6, 6, 1]} />
+        <Lightformer form="ring" intensity={p.lights.ringI} color={p.lights.ring} position={[0, 5, 0]} rotation-x={Math.PI / 2} scale={4} />
+        <Lightformer form="rect" intensity={p.lights.lowI} color={p.lights.low} position={[0, -3, 3]} scale={[8, 1, 1]} />
       </Environment>
 
       <Aim />
       <Stage wide={wide}>
-        <Glow />
+        <Glow p={p} />
         <Rig reduced={reduced} compact={compact}>
           <group rotation-x={-0.05}>
-            <Shield />
-            <Pillars count={compact ? 28 : 56} radius={radius} instant={reduced} />
-            <Rings radius={radius} />
-            {!compact && <LifeObjects radius={radius} />}
+            <Shield p={p} />
+            <Pillars count={compact ? 28 : 56} radius={radius} instant={reduced} p={p} />
+            <Rings radius={radius} p={p} />
+            {!compact && <LifeObjects radius={radius} p={p} />}
           </group>
         </Rig>
       </Stage>
-      {!compact && !reduced && <Sparkles count={46} scale={[9, 5, 9]} size={2.2} speed={0.25} opacity={0.5} color="#7cc0ff" />}
+      {!compact && !reduced && <Sparkles count={46} scale={[9, 5, 9]} size={2.2} speed={0.25} opacity={p.sparkleOpacity} color={p.sparkle} />}
     </Canvas>
   );
 }

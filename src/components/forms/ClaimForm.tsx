@@ -56,7 +56,7 @@ export function ClaimForm() {
     <form onSubmit={onSubmit} noValidate className="surface space-y-5 p-6 sm:p-10" aria-label="Claims enquiry">
       <Honeypot register={register("website")} />
       <h2 className="h3">Start a claims enquiry</h2>
-      <p className="text-sm text-mist">
+      <p className="text-sm text-fg-2">
         This is an enquiry, not a formal claim submission. The team will tell you what happens next.
       </p>
       <div className="grid gap-5 sm:grid-cols-2">
@@ -91,11 +91,11 @@ export function ClaimForm() {
         <textarea id="cl-summary" rows={5} maxLength={1500} className={inputClass} aria-invalid={Boolean(errors.summary)} aria-describedby={describedBy("cl-summary", errors.summary?.message, "hint")} {...register("summary")} />
       </Field>
       <div>
-        <label className="flex cursor-pointer items-start gap-3 text-sm text-mist">
-          <input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-[#4da3ff]" aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "cl-consent-error" : undefined} {...register("consent")} />
+        <label className="flex cursor-pointer items-start gap-3 text-sm text-fg-2">
+          <input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-brand" aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "cl-consent-error" : undefined} {...register("consent")} />
           <span>
             I agree that CONSOLE INSURANCE may use these details to follow up on my enquiry, as described in the{" "}
-            <a href="/privacy" target="_blank" rel="noopener" className="text-electric-300 underline underline-offset-4">
+            <a href="/privacy" target="_blank" rel="noopener" className="text-brand underline underline-offset-4">
               privacy notice
             </a>
             .

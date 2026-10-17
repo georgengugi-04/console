@@ -17,7 +17,7 @@ export default function PrivacyPage() {
       <PageHero eyebrow="Privacy & data" title="Your information, handled with care." />
       <section className="section pt-4">
         <div className="container-x max-w-3xl">
-          <p className="rounded-xl border border-dashed border-electric-400/50 bg-electric-400/5 p-4 text-sm text-electric-300">
+          <p className="rounded-xl border border-dashed border-brand/50 bg-brand-soft p-4 text-sm text-brand">
             Draft notice describing how this website works. It must be reviewed and approved by CONSOLE (and a legal
             adviser) before launch.
           </p>

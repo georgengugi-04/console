@@ -61,8 +61,8 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             </div>
           </Reveal>
           <Reveal className="lg:col-span-5" delay={0.1}>
-            <div className="surface grid place-items-center p-10" style={{ boxShadow: `0 40px 120px -70px ${product.accent}` }}>
-              <ProductArt slug={product.slug} accent={product.accent} className="h-auto w-full max-w-xs" />
+            <div className="surface grid place-items-center p-10">
+              <ProductArt slug={product.slug} className="h-auto w-full max-w-xs" />
             </div>
           </Reveal>
         </div>
@@ -79,7 +79,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           <ul className="grid gap-4 lg:col-span-7">
             {product.considerations.map((c, i) => (
               <Reveal as="li" key={c} delay={i * 0.07} className="surface flex gap-5 p-6">
-                <span className="font-display text-sm text-electric-300">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-sm text-brand">{String(i + 1).padStart(2, "0")}</span>
                 <span>{c}</span>
               </Reveal>
             ))}
@@ -94,20 +94,20 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             <h2 id="ask" className="h2 mt-4">
               Good questions for an adviser.
             </h2>
-            <p className="mt-5 text-mist">
+            <p className="mt-5 text-fg-2">
               Bring these to your conversation — or send them to us and we&apos;ll reply.
             </p>
           </Reveal>
           <ul className="space-y-3 lg:col-span-7">
             {product.askUs.map((q) => (
               <li key={q} className="flex items-start gap-4 rounded-2xl border border-line p-5">
-                <HelpCircle className="mt-0.5 shrink-0 text-electric-300" size={20} aria-hidden />
+                <HelpCircle className="mt-0.5 shrink-0 text-brand" size={20} aria-hidden />
                 <span>{q}</span>
               </li>
             ))}
           </ul>
         </div>
-        <p className="container-x mt-12 max-w-3xl text-sm text-steel">
+        <p className="container-x mt-12 max-w-3xl text-sm text-fg-muted">
           This page is general information, not advice or an offer of cover. Terms, benefits, exclusions and prices are
           set by the issuing insurer and described in the policy documents.
         </p>
@@ -119,12 +119,12 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           <ul className="mt-8 grid gap-4 sm:grid-cols-3">
             {others.map((p) => (
               <li key={p.slug}>
-                <Link href={`/products/${p.slug}`} className="surface flex h-full min-h-28 items-center justify-between gap-4 p-6 transition hover:border-electric-300">
+                <Link href={`/products/${p.slug}`} className="surface flex h-full min-h-28 items-center justify-between gap-4 p-6 transition hover:border-line-strong">
                   <span>
-                    <span className="block font-display text-xs tracking-[0.2em]" style={{ color: p.accent }}>{p.code}</span>
+                    <span className="block font-display text-xs tracking-[0.2em] text-brand">{p.code}</span>
                     <span className="mt-1 block font-semibold">{p.name}</span>
                   </span>
-                  <ArrowUpRight size={18} aria-hidden className="text-electric-300" />
+                  <ArrowUpRight size={18} aria-hidden className="text-brand" />
                 </Link>
               </li>
             ))}

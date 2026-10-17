@@ -2,46 +2,65 @@
 
 /* ─────────────────────────────────────────────────────────────
    CONSOLE INSURANCE — design tokens
-   Direction: midnight navy surfaces, cobalt/electric interaction colour,
-   cool-white type, silver hairlines. Light is used sparingly and on purpose.
+   Direction: forest green, warm ivory, soft charcoal, muted stone and restrained sage.
+   One semantic token set, two themes. Components use semantic names only
+   (bg-page, bg-surface, text-fg, text-brand …) — never literal colours.
+   Light is the base; dark overrides under [data-theme="dark"].
    ───────────────────────────────────────────────────────────── */
-@theme {
+@theme static {
+  --color-*: initial; /* drop Tailwind's default palette so nothing can bypass the system */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
   --font-display: var(--font-unbounded), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* surfaces */
-  --color-ink-950: #02050d;
-  --color-ink-900: #050a18;
-  --color-ink-850: #081022;
-  --color-ink-800: #0b1530;
-  --color-ink-700: #111f42;
-  --color-ink-600: #1a2c58;
+  --color-page: #f7f6f2; /* warm ivory page */
+  --color-surface: #ffffff; /* cards, inputs' parent */
+  --color-sunken: #efeee8; /* secondary / alternate sections */
+  --color-raised: #ffffff; /* menus, popovers, elevated */
+  --color-scrim: rgba(32, 41, 35, 0.45);
 
-  /* interaction */
-  --color-cobalt-600: #1747d6;
-  --color-cobalt-500: #2563ff;
-  --color-cobalt-400: #3d7bff;
-  --color-electric-400: #4da3ff;
-  --color-electric-300: #7cc0ff;
+  /* text */
+  --color-fg: #202923;
+  --color-fg-2: #4f5a52; /* body copy on ivory/stone — 6.2:1+ */
+  --color-fg-muted: #626b64; /* metadata — 4.75:1+ on every light surface */
 
-  /* type */
-  --color-snow: #f2f6ff;
-  --color-silver: #c9d3ea;
-  --color-mist: #b4c0dc;
-  --color-steel: #8491b0;
+  /* brand */
+  --color-brand: #234b40;
+  --color-brand-hover: #193b32;
+  --color-brand-fg: #ffffff;
+  --color-brand-soft: rgba(35, 75, 64, 0.08);
+  --color-accent: #a7b7a7; /* sage — decorative fills only, never text */
 
-  --color-line: rgba(150, 185, 255, 0.14);
-  --color-line-strong: rgba(150, 185, 255, 0.28);
-  --color-danger: #ff7a8a;
-  --color-ok: #5fe3b1;
+  /* lines + fields */
+  --color-line: #e1e2da; /* decorative dividers and card edges */
+  --color-line-strong: #c9cec4;
+  --color-field-line: #7f897f; /* control boundaries: ≥3:1 (WCAG 1.4.11) */
+  --color-field: #ffffff;
+  --color-ring: #234b40;
+
+  /* status */
+  --color-ok: #28734e;
+  --color-warn: #8a5f19; /* refined from #91651C to clear 4.5:1 on the stone surface */
+  --color-danger: #b42332;
+
+  /* logo / scene ramp (decorative) */
+  --color-mark-a: #234b40;
+  --color-mark-b: #3f6f5d;
+  --color-swoosh-a: #2f6b57;
+  --color-swoosh-b: #7aa38b;
 
   /* radii */
   --radius-card: 1.25rem;
   --radius-pill: 999px;
 
-  /* shadows */
-  --shadow-glow: 0 0 0 1px rgba(125, 170, 255, 0.18), 0 24px 70px -28px rgba(37, 99, 255, 0.55);
-  --shadow-lift: 0 30px 80px -40px rgba(0, 0, 0, 0.8);
+  /* elevation */
+  --shadow-card: 0 1px 2px rgba(32, 41, 35, 0.04), 0 10px 28px -16px rgba(32, 41, 35, 0.14);
+  --shadow-lift: 0 2px 4px rgba(32, 41, 35, 0.05), 0 24px 48px -24px rgba(32, 41, 35, 0.22);
 
   /* motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -54,22 +73,62 @@
   --text-h3: clamp(1.25rem, 1rem + 1vw, 1.75rem);
 }
 
+/* Dark: designed, not inverted — deep green-black surfaces, sage accent, soft off-white text. */
+:root[data-theme="dark"] {
+  --color-page: #141b18;
+  --color-surface: #1c2520;
+  --color-sunken: #101613;
+  --color-raised: #25312a;
+  --color-scrim: rgba(8, 12, 10, 0.62);
+
+  --color-fg: #f2f4ef;
+  --color-fg-2: #b8c2b9;
+  --color-fg-muted: #9aa79c;
+
+  --color-brand: #a7c4af;
+  --color-brand-hover: #bad3c1;
+  --color-brand-fg: #18221c;
+  --color-brand-soft: rgba(167, 196, 175, 0.1);
+  --color-accent: #7e9d89;
+
+  --color-line: #354139;
+  --color-line-strong: #49574d;
+  --color-field-line: #6e7f73;
+  --color-field: #141b18;
+  --color-ring: #a7c4af;
+
+  --color-ok: #7ccba0;
+  --color-warn: #e0b15c;
+  --color-danger: #f29aa3;
+
+  --color-mark-a: #f2f4ef;
+  --color-mark-b: #b8c2b9;
+  --color-swoosh-a: #7e9d89;
+  --color-swoosh-b: #a7c4af;
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.025) inset, 0 14px 32px -18px rgba(0, 0, 0, 0.65);
+  --shadow-lift: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 28px 56px -24px rgba(0, 0, 0, 0.75);
+}
+
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --header-h: 4.5rem;
 }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
 
 html {
-  background: var(--color-ink-950);
+  background: var(--color-page);
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-h) + 1rem);
 }
 
 body {
-  background: var(--color-ink-950);
-  color: var(--color-snow);
+  background: var(--color-page);
+  color: var(--color-fg);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.65;
@@ -80,15 +139,39 @@ body {
 }
 
 ::selection {
-  background: var(--color-cobalt-500);
-  color: #fff;
+  background: var(--color-brand);
+  color: var(--color-brand-fg);
 }
 
 /* Focus: always visible, never colour-only (WCAG 2.2 AA 2.4.7 / 2.4.11) */
 :focus-visible {
-  outline: 2px solid var(--color-electric-300);
+  outline: 2px solid var(--color-ring);
   outline-offset: 3px;
   border-radius: 6px;
+}
+
+/* Short, subtle cross-fade when the visitor flips the theme (class is added/removed by lib/theme.ts) */
+html.theme-fade,
+html.theme-fade *,
+html.theme-fade *::before,
+html.theme-fade *::after {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    fill 0.25s ease,
+    stroke 0.25s ease !important;
+}
+
+/* Theme toggle icons: CSS picks the icon from <html data-theme>, so there is no flash before hydration */
+.theme-icon-moon {
+  display: none;
+}
+:root[data-theme="dark"] .theme-icon-sun {
+  display: none;
+}
+:root[data-theme="dark"] .theme-icon-moon {
+  display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -122,7 +205,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-electric-300);
+  color: var(--color-brand);
 }
 
 .h-display {
@@ -157,12 +240,13 @@ body {
 .lead {
   font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
   line-height: 1.6;
-  color: var(--color-mist);
+  color: var(--color-fg-2);
   max-width: 46ch;
 }
 
+/* Tonal emphasis (no rainbow): brand → deeper brand */
 .text-gradient {
-  background: linear-gradient(100deg, #fff 10%, var(--color-electric-300) 55%, var(--color-cobalt-400) 100%);
+  background: linear-gradient(100deg, var(--color-fg) 0%, var(--color-brand) 70%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -170,28 +254,28 @@ body {
 
 /* ── surfaces ───────────────────────────────────────────────── */
 .surface {
-  background: linear-gradient(180deg, rgba(17, 31, 66, 0.55), rgba(8, 16, 34, 0.55));
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
 }
 
 .hairline-t {
   border-top: 1px solid var(--color-line);
 }
 
-/* Atmosphere: soft cobalt light + faint grid. Static, no GPU cost. */
+/* Atmosphere: a barely-there sage wash on the page colour. Static, no GPU cost. */
 .atmosphere {
   background:
-    radial-gradient(60rem 40rem at 78% -10%, rgba(37, 99, 255, 0.22), transparent 60%),
-    radial-gradient(40rem 30rem at -10% 40%, rgba(77, 163, 255, 0.1), transparent 60%),
-    var(--color-ink-950);
+    radial-gradient(56rem 36rem at 80% -12%, color-mix(in srgb, var(--color-accent) 26%, transparent), transparent 62%),
+    var(--color-page);
 }
 .grid-lines {
   background-image:
-    linear-gradient(to right, rgba(150, 185, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(150, 185, 255, 0.05) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+    linear-gradient(to right, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 10%, transparent 70%);
 }
 
 /* Spotlight card (pattern adapted from ReactBits "Spotlight Card") */
@@ -204,7 +288,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(77, 163, 255, 0.16), transparent 55%);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--color-accent) 22%, transparent), transparent 60%);
   opacity: 0;
   transition: opacity 0.4s var(--ease-out-expo);
   pointer-events: none;
@@ -231,7 +315,7 @@ body {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: conic-gradient(from var(--beam-angle), transparent 0 70%, var(--color-electric-300) 85%, transparent 100%);
+  background: conic-gradient(from var(--beam-angle), transparent 0 70%, var(--color-brand) 85%, transparent 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -252,7 +336,7 @@ html[data-intro="pending"]::after {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: var(--color-ink-950);
+  background: var(--color-page);
   animation: introCoverFailsafe 0.01s 5s forwards;
 }
 @keyframes introCoverFailsafe {
@@ -298,7 +382,7 @@ html[data-intro="pending"] body {
   margin-bottom: 0.6rem;
 }
 .prose-console p {
-  color: var(--color-mist);
+  color: var(--color-fg-2);
   margin-top: 0.9rem;
   max-width: 68ch;
 }
@@ -306,14 +390,14 @@ html[data-intro="pending"] body {
   margin-top: 0.9rem;
   padding-left: 1.2rem;
   list-style: disc;
-  color: var(--color-mist);
+  color: var(--color-fg-2);
   max-width: 68ch;
 }
 .prose-console li + li {
   margin-top: 0.35rem;
 }
 .prose-console a {
-  color: var(--color-electric-300);
+  color: var(--color-brand);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

@@ -29,19 +29,19 @@ export function SubmitResult({
         {dev ? (
           <>
             <h2 className="h3 mt-4">Saved in development mode</h2>
-            <p className="mx-auto mt-3 max-w-md text-mist">
+            <p className="mx-auto mt-3 max-w-md text-fg-2">
               This copy of the site isn&apos;t connected to CONSOLE yet, so your details were stored only on this
-              server and have <strong className="text-snow">not</strong> been sent to the team.
+              server and have <strong className="text-fg">not</strong> been sent to the team.
             </p>
           </>
         ) : (
           <>
             <h2 className="h3 mt-4">We&apos;ve received your enquiry</h2>
-            <p className="mx-auto mt-3 max-w-md text-mist">Thank you. Here&apos;s what happens next:</p>
-            <ol className="mx-auto mt-5 max-w-md space-y-2 text-left text-sm text-mist">
+            <p className="mx-auto mt-3 max-w-md text-fg-2">Thank you. Here&apos;s what happens next:</p>
+            <ol className="mx-auto mt-5 max-w-md space-y-2 text-left text-sm text-fg-2">
               {nextSteps.map((s, i) => (
                 <li key={s} className="flex gap-3">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-cobalt-500/25 font-display text-[0.7rem] text-electric-300">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-soft font-display text-[0.7rem] text-brand">
                     {i + 1}
                   </span>
                   <span>{s}</span>
@@ -50,8 +50,8 @@ export function SubmitResult({
             </ol>
           </>
         )}
-        <p className="mt-8 text-xs text-steel">
-          Reference <span className="font-mono text-silver">{state.result.reference}</span>
+        <p className="mt-8 text-xs text-fg-muted">
+          Reference <span className="font-mono text-fg-2">{state.result.reference}</span>
         </p>
         <Link href="/" className={buttonClass("ghost", "mt-6")}>
           Back to home
@@ -69,14 +69,14 @@ export function SubmitResult({
           <h2 className="h3">
             {result.code === "not_configured" ? "Online enquiries aren't connected yet" : "We couldn't send that"}
           </h2>
-          <p className="mt-3 text-mist">{result.message}</p>
+          <p className="mt-3 text-fg-2">{result.message}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             {company.contact.phone.status === "supplied" ? (
               <a href={`tel:${company.contact.phone.tel}`} className={buttonClass("ghost", "min-h-11")}>
                 <Phone size={16} aria-hidden /> {company.contact.phone.display}
               </a>
             ) : (
-              <span className="inline-flex min-h-11 items-center gap-2 px-2 text-sm text-mist">
+              <span className="inline-flex min-h-11 items-center gap-2 px-2 text-sm text-fg-2">
                 <Phone size={16} aria-hidden /> {company.contact.phone.display}
               </span>
             )}

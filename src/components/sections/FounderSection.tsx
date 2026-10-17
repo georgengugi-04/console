@@ -16,11 +16,11 @@ export function FounderSection({ id = "founder" }: { id?: string }) {
             >
               <div
                 aria-hidden
-                className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_30%,rgba(37,99,255,0.28),transparent_70%)]"
+                className="absolute inset-0 bg-sunken"
               />
-              <svg viewBox="0 0 120 150" className="relative h-2/3 w-auto opacity-70" fill="none" aria-hidden>
-                <circle cx="60" cy="52" r="26" stroke="#7cc0ff" strokeWidth="2" />
-                <path d="M12 142 c4 -38 26 -52 48 -52 s44 14 48 52" stroke="#7cc0ff" strokeWidth="2" strokeLinecap="round" />
+              <svg viewBox="0 0 120 150" className="relative h-2/3 w-auto text-accent" fill="none" aria-hidden>
+                <circle cx="60" cy="52" r="26" stroke="currentColor" strokeWidth="2" />
+                <path d="M12 142 c4 -38 26 -52 48 -52 s44 14 48 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
               <div className="absolute bottom-4 left-4 right-4 text-center">
                 <Placeholder>approved founder photograph to be supplied</Placeholder>
@@ -35,7 +35,7 @@ export function FounderSection({ id = "founder" }: { id?: string }) {
             <h2 id="founder-title" className="h2 mt-4">
               {founder.name}
             </h2>
-            <p className="mt-2 text-mist">{founder.role}</p>
+            <p className="mt-2 text-fg-2">{founder.role}</p>
           </Reveal>
 
           <ol className="relative mt-12 space-y-0 border-l border-line-strong pl-8">
@@ -43,11 +43,11 @@ export function FounderSection({ id = "founder" }: { id?: string }) {
               <Reveal as="li" key={item.year} delay={i * 0.08} className="relative pb-10 last:pb-0">
                 <span
                   aria-hidden
-                  className="absolute -left-[2.45rem] top-1.5 h-3 w-3 rounded-full border-2 border-electric-300 bg-ink-950"
+                  className="absolute -left-[2.45rem] top-1.5 h-3 w-3 rounded-full border-2 border-brand bg-page"
                 />
-                <p className="font-display text-sm tracking-[0.18em] text-electric-300">{item.year}</p>
+                <p className="font-display text-sm tracking-[0.18em] text-brand">{item.year}</p>
                 <h3 className="mt-1 text-lg font-semibold">{item.title}</h3>
-                <p className="mt-1 text-mist">{item.detail}</p>
+                <p className="mt-1 text-fg-2">{item.detail}</p>
               </Reveal>
             ))}
           </ol>

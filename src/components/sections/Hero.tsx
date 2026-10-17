@@ -37,13 +37,13 @@ export function Hero() {
               </LinkButton>
             </Magnetic>
           </div>
-          <p className="mt-8 text-sm text-steel">
+          <p className="mt-8 text-sm text-fg-muted">
             {company.name} · {company.legalDescriptor}
           </p>
         </div>
       </div>
 
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink-950" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-page" />
     </section>
   );
 }

@@ -114,7 +114,7 @@ export function IntroGate() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="intro-title"
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-ink-950 px-6 text-center"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-page px-6 text-center"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: reduce ? 1 : 1.04, filter: reduce ? "none" : "blur(6px)" }}
           transition={{ duration: reduce ? 0.01 : 0.85, ease: ease.inOut }}
@@ -125,7 +125,7 @@ export function IntroGate() {
           <button
             ref={skipRef}
             onClick={close}
-            className="absolute right-5 top-5 rounded-full border border-line-strong px-4 py-2 text-sm font-semibold text-mist transition hover:border-electric-300 hover:text-white sm:right-8 sm:top-8"
+            className="absolute right-5 top-5 rounded-full border border-field-line px-4 py-2 text-sm font-semibold text-fg-2 transition hover:bg-brand-soft hover:text-fg sm:right-8 sm:top-8"
           >
             Skip introduction
           </button>
@@ -135,22 +135,21 @@ export function IntroGate() {
             <svg viewBox="0 0 104 110" className="relative h-36 w-auto sm:h-44" fill="none" aria-hidden>
               <defs>
                 <linearGradient id="in-sw" x1="0" y1="1" x2="1" y2="0">
-                  <stop offset="0" stopColor="#1747d6" />
-                  <stop offset="0.55" stopColor="#2f86ff" />
-                  <stop offset="1" stopColor="#7cc0ff" />
+                  <stop offset="0" style={{ stopColor: "var(--color-swoosh-a)" }} />
+                  <stop offset="1" style={{ stopColor: "var(--color-swoosh-b)" }} />
                 </linearGradient>
                 <linearGradient id="in-sh" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#ffffff" />
-                  <stop offset="1" stopColor="#b9c9ee" />
+                  <stop offset="0" style={{ stopColor: "var(--color-mark-a)" }} />
+                  <stop offset="1" style={{ stopColor: "var(--color-mark-b)" }} />
                 </linearGradient>
                 <mask id="in-cut" maskUnits="userSpaceOnUse" x="-10" y="-10" width="130" height="130">
                   <rect x="-10" y="-10" width="130" height="130" fill="#fff" />
                   <path d={SWOOSH_PATH} fill="#000" stroke="#000" strokeWidth="9" strokeLinejoin="round" />
                 </mask>
                 <linearGradient id="in-sweep" gradientUnits="userSpaceOnUse" x1="-40" y1="0" x2="0" y2="0">
-                  <stop offset="0" stopColor="#7cc0ff" stopOpacity="0" />
-                  <stop offset="0.5" stopColor="#bfe0ff" stopOpacity="0.95" />
-                  <stop offset="1" stopColor="#7cc0ff" stopOpacity="0" />
+                  <stop offset="0" style={{ stopColor: "var(--color-accent)" }} stopOpacity="0" />
+                  <stop offset="0.5" style={{ stopColor: "var(--color-page)" }} stopOpacity="0.85" />
+                  <stop offset="1" style={{ stopColor: "var(--color-accent)" }} stopOpacity="0" />
                   <animateTransform
                     attributeName="gradientTransform"
                     type="translate"
@@ -204,7 +203,7 @@ export function IntroGate() {
             <span className="font-display text-[clamp(2rem,1.2rem+3vw,3.4rem)] font-semibold leading-none tracking-[-0.03em]">
               CONSOLE
             </span>
-            <span className="mt-3 text-[0.8rem] font-semibold tracking-[0.7em] text-electric-400">INSURANCE</span>
+            <span className="mt-3 text-[0.8rem] font-semibold tracking-[0.7em] text-brand">INSURANCE</span>
           </motion.div>
 
           {/* Message */}
@@ -217,7 +216,7 @@ export function IntroGate() {
             <h2 id="intro-title" className="font-display text-xl font-medium tracking-[-0.02em] sm:text-2xl">
               Welcome to CONSOLE Insurance.
             </h2>
-            <p className="mt-3 text-base text-mist sm:text-lg">
+            <p className="mt-3 text-base text-fg-2 sm:text-lg">
               Your future deserves thoughtful protection. Let&apos;s explore what matters to you.
             </p>
           </motion.div>
@@ -231,7 +230,7 @@ export function IntroGate() {
                 initial={{ opacity: reduce ? 1 : 0, y: reduce ? 0 : 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: d(0.6), ease: ease.out }}
-                className="beam-border inline-flex min-h-12 items-center gap-2 bg-cobalt-500 px-8 text-[0.95rem] font-semibold text-white shadow-[0_12px_50px_-10px_rgba(37,99,255,0.9)] transition hover:bg-cobalt-400"
+                className="beam-border inline-flex min-h-12 items-center gap-2 bg-brand px-8 text-[0.95rem] font-semibold text-brand-fg transition hover:bg-brand-hover"
               >
                 Enter Experience
                 <span aria-hidden>→</span>

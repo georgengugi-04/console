@@ -35,21 +35,20 @@ export function Explorer() {
 
   return (
     <div className="surface relative overflow-hidden p-6 sm:p-10" aria-live="polite">
-      <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cobalt-500/20 blur-3xl" />
 
       {/* progress */}
       <div className="relative mb-8 flex items-center gap-3" role="group" aria-label={`Step ${Math.min(step + 1, total)} of ${total}`}>
         {stages.map((s, i) => (
-          <div key={s.id} className="h-1 flex-1 overflow-hidden rounded-full bg-white/10">
+          <div key={s.id} className="h-1 flex-1 overflow-hidden rounded-full bg-fg/10">
             <motion.div
-              className="h-full bg-electric-300"
+              className="h-full bg-brand"
               initial={false}
               animate={{ width: i < step ? "100%" : i === step ? "35%" : "0%" }}
               transition={{ duration: 0.6, ease: ease.out }}
             />
           </div>
         ))}
-        <span className="text-xs tabular-nums text-steel">
+        <span className="text-xs tabular-nums text-fg-muted">
           {done ? "Done" : `${step + 1}/${total}`}
         </span>
       </div>
@@ -65,7 +64,7 @@ export function Explorer() {
             className="relative"
           >
             <h3 className="h3">{stages[step]!.label}</h3>
-            <p className="mt-2 text-sm text-mist">{stages[step]!.hint}</p>
+            <p className="mt-2 text-sm text-fg-2">{stages[step]!.hint}</p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {stages[step]!.needs.map((need) => {
                 const selected = picks[stages[step]!.id] === need.id;
@@ -75,10 +74,10 @@ export function Explorer() {
                       type="button"
                       onClick={() => choose(stages[step]!.id, need.id)}
                       aria-pressed={selected}
-                      className="group flex min-h-20 w-full flex-col items-start justify-center rounded-2xl border border-line bg-ink-850/60 p-5 text-left transition hover:border-electric-300 hover:bg-ink-800"
+                      className="group flex min-h-20 w-full flex-col items-start justify-center rounded-2xl border border-line bg-page p-5 text-left transition hover:border-line-strong hover:bg-sunken"
                     >
-                      <span className="font-semibold text-snow">{need.label}</span>
-                      <span className="mt-1 text-sm text-steel group-hover:text-mist">{need.hint}</span>
+                      <span className="font-semibold text-fg">{need.label}</span>
+                      <span className="mt-1 text-sm text-fg-muted group-hover:text-fg-2">{need.hint}</span>
                     </button>
                   </li>
                 );
@@ -88,7 +87,7 @@ export function Explorer() {
               <button
                 type="button"
                 onClick={() => setStep((s) => s - 1)}
-                className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm text-mist transition hover:text-white"
+                className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm text-fg-2 transition hover:text-fg"
               >
                 <ArrowLeft size={16} aria-hidden /> Back
               </button>
@@ -103,7 +102,7 @@ export function Explorer() {
             className="relative"
           >
             <h3 className="h3">Good places to start reading</h3>
-            <p className="mt-2 max-w-xl text-sm text-mist">
+            <p className="mt-2 max-w-xl text-sm text-fg-2">
               This isn&apos;t advice or a recommendation of cover — it&apos;s a starting point. Our team can explain the
               options and what each would need from you.
             </p>
@@ -112,14 +111,14 @@ export function Explorer() {
                 <li key={p.slug}>
                   <Link
                     href={`/products/${p.slug}`}
-                    className="flex h-full min-h-32 flex-col justify-between rounded-2xl border border-line bg-ink-850/60 p-5 transition hover:border-electric-300"
+                    className="flex h-full min-h-32 flex-col justify-between rounded-2xl border border-line bg-page p-5 transition hover:border-line-strong"
                   >
-                    <span className="font-display text-xs tracking-[0.2em]" style={{ color: p.accent }}>
+                    <span className="font-display text-xs tracking-[0.2em] text-brand">
                       {p.code}
                     </span>
                     <span>
                       <span className="block font-semibold">{p.name}</span>
-                      <span className="mt-1 block text-sm text-steel">{p.short}</span>
+                      <span className="mt-1 block text-sm text-fg-muted">{p.short}</span>
                     </span>
                   </Link>
                 </li>

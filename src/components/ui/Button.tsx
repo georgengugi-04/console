@@ -8,9 +8,9 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-cobalt-500 text-white shadow-[0_10px_40px_-12px_rgba(37,99,255,0.9)] hover:bg-cobalt-400 hover:shadow-[0_14px_50px_-10px_rgba(61,123,255,1)]",
-  ghost: "border border-line-strong text-snow hover:border-electric-300 hover:bg-white/5",
-  quiet: "text-mist hover:text-white",
+    "bg-brand text-brand-fg shadow-card hover:bg-brand-hover",
+  ghost: "border border-field-line text-fg hover:bg-brand-soft",
+  quiet: "text-fg-2 hover:text-fg",
 };
 
 export function buttonClass(variant: Variant = "primary", extra = "") {

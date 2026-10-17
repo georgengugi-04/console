@@ -28,8 +28,6 @@ export type Product = {
   /** Questions worth asking an adviser before choosing a policy. */
   askUs: string[];
   /** Accent hue used for the product's visual identity (CSS color) */
-  accent: string;
-  accentSoft: string;
   /** Short mono code for editorial numbering */
   code: string;
   available: boolean;
@@ -56,8 +54,6 @@ export const products: Product[] = [
       "What does the insurer need to know about my health and lifestyle?",
       "How are beneficiaries named and updated?",
     ],
-    accent: "#4f8cff",
-    accentSoft: "rgba(79,140,255,0.16)",
     code: "01",
     available: true,
   },
@@ -80,8 +76,6 @@ export const products: Product[] = [
       "How do I check that my preferred facilities are covered?",
       "What happens to my cover at renewal?",
     ],
-    accent: "#38d6c4",
-    accentSoft: "rgba(56,214,196,0.14)",
     code: "02",
     available: true,
   },
@@ -104,8 +98,6 @@ export const products: Product[] = [
       "What do I need to provide to get a quote?",
       "What should I do first if my vehicle is in an accident?",
     ],
-    accent: "#6aa7ff",
-    accentSoft: "rgba(106,167,255,0.16)",
     code: "03",
     available: true,
   },
@@ -128,8 +120,6 @@ export const products: Product[] = [
       "How should I list and value my belongings?",
       "What documents do I need to start?",
     ],
-    accent: "#8ab4ff",
-    accentSoft: "rgba(138,180,255,0.14)",
     code: "04",
     available: true,
   },
@@ -143,8 +133,6 @@ export const products: Product[] = [
     whoItsFor: "Business owners and managers.",
     considerations: ["Awaiting confirmation from CONSOLE."],
     askUs: ["Awaiting confirmation from CONSOLE."],
-    accent: "#a5c4ff",
-    accentSoft: "rgba(165,196,255,0.14)",
     code: "05",
     available: false, // ← not in any supplied file. Set to true once CONSOLE confirms.
   },

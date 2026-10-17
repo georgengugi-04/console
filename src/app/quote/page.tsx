@@ -31,30 +31,30 @@ export default function QuotePage() {
           <aside aria-label="Before you start" className="space-y-6 lg:col-span-4 lg:sticky lg:top-28">
             <div className="surface p-7">
               <h2 className="h3">What happens next</h2>
-              <ol className="mt-5 space-y-4 text-sm text-mist">
-                <li><span className="font-semibold text-snow">1.</span> Your details reach the CONSOLE team.</li>
-                <li><span className="font-semibold text-snow">2.</span> A team member contacts you by the method you choose.</li>
-                <li><span className="font-semibold text-snow">3.</span> They explain the options and what the insurer will need.</li>
+              <ol className="mt-5 space-y-4 text-sm text-fg-2">
+                <li><span className="font-semibold text-fg">1.</span> Your details reach the CONSOLE team.</li>
+                <li><span className="font-semibold text-fg">2.</span> A team member contacts you by the method you choose.</li>
+                <li><span className="font-semibold text-fg">3.</span> They explain the options and what the insurer will need.</li>
               </ol>
             </div>
-            <div className="surface p-7 text-sm text-mist">
-              <h2 className="font-semibold text-snow">We only ask for what we need</h2>
+            <div className="surface p-7 text-sm text-fg-2">
+              <h2 className="font-semibold text-fg">We only ask for what we need</h2>
               <p className="mt-2">
                 Name, email, phone and a short note. Please don&apos;t send ID numbers, bank or card details through this
                 form. See the{" "}
-                <a href="/privacy" className="text-electric-300 underline underline-offset-4">privacy notice</a>.
+                <a href="/privacy" className="text-brand underline underline-offset-4">privacy notice</a>.
               </p>
             </div>
-            <div className="surface p-7 text-sm text-mist">
-              <h2 className="font-semibold text-snow">Prefer to talk?</h2>
+            <div className="surface p-7 text-sm text-fg-2">
+              <h2 className="font-semibold text-fg">Prefer to talk?</h2>
               <ul className="mt-3 space-y-2">
                 <li className="flex items-center gap-3">
-                  <Phone size={16} className="text-electric-300" aria-hidden />
-                  <PhoneText className="hover:text-white" />
+                  <Phone size={16} className="text-brand" aria-hidden />
+                  <PhoneText className="hover:text-fg" />
                 </li>
                 <li className="flex items-center gap-3">
-                  <Mail size={16} className="shrink-0 text-electric-300" aria-hidden />
-                  <a href={`mailto:${company.contact.email.value}`} className="break-all hover:text-white">{company.contact.email.value}</a>
+                  <Mail size={16} className="shrink-0 text-brand" aria-hidden />
+                  <a href={`mailto:${company.contact.email.value}`} className="break-all hover:text-fg">{company.contact.email.value}</a>
                 </li>
               </ul>
             </div>

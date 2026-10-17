@@ -37,13 +37,13 @@ export function ProtectionStory() {
             <li key={p.slug} className="surface overflow-hidden p-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="font-display text-xs tracking-[0.2em] text-electric-300">{p.code}</p>
+                  <p className="font-display text-xs tracking-[0.2em] text-brand">{p.code}</p>
                   <h3 className="h3 mt-2">{p.name}</h3>
-                  <p className="mt-3 text-mist">{p.short}</p>
+                  <p className="mt-3 text-fg-2">{p.short}</p>
                 </div>
-                <ProductArt slug={p.slug} accent={p.accent} className="h-24 w-auto shrink-0" />
+                <ProductArt slug={p.slug} className="h-24 w-auto shrink-0" />
               </div>
-              <Link href={`/products/${p.slug}`} className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-electric-300">
+              <Link href={`/products/${p.slug}`} className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-brand">
                 Learn more<span className="sr-only"> about {p.name}</span> <ArrowUpRight size={16} aria-hidden />
               </Link>
             </li>
@@ -66,18 +66,18 @@ export function ProtectionStory() {
                     <Link
                       href={`/products/${p.slug}`}
                       className={`flex items-baseline gap-4 rounded-xl px-3 py-2 transition-colors ${
-                        i === index ? "text-white" : "text-steel hover:text-mist"
+                        i === index ? "text-fg" : "text-fg-muted hover:text-fg-2"
                       }`}
                       aria-current={i === index ? "true" : undefined}
                     >
-                      <span className="font-display text-xs tracking-[0.2em] text-electric-300">{p.code}</span>
+                      <span className="font-display text-xs tracking-[0.2em] text-brand">{p.code}</span>
                       <span className="font-display text-2xl tracking-[-0.02em]">{p.name}</span>
                     </Link>
                   </li>
                 ))}
               </ol>
               <div className="mt-8 h-px w-full bg-line">
-                <motion.div className="h-px origin-left bg-electric-300" style={{ scaleX: scrollYProgress }} />
+                <motion.div className="h-px origin-left bg-brand" style={{ scaleX: scrollYProgress }} />
               </div>
             </div>
 
@@ -90,28 +90,23 @@ export function ProtectionStory() {
                   exit={{ opacity: 0, y: -20, filter: "blur(6px)" }}
                   transition={{ duration: 0.55, ease: ease.out }}
                   className="surface relative grid grid-cols-5 items-center gap-6 overflow-hidden p-10"
-                  style={{ boxShadow: `0 40px 120px -60px ${active.accent}` }}
+                 
                 >
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full blur-3xl"
-                    style={{ background: active.accentSoft }}
-                  />
                   <div className="relative col-span-3">
-                    <p className="font-display text-sm tracking-[0.2em]" style={{ color: active.accent }}>
+                    <p className="font-display text-sm tracking-[0.2em] text-brand">
                       {active.code} / {String(availableProducts.length).padStart(2, "0")}
                     </p>
                     <h3 className="h2 mt-4">{active.headline}</h3>
-                    <p className="mt-5 text-mist">{active.summary}</p>
+                    <p className="mt-5 text-fg-2">{active.summary}</p>
                     <Link
                       href={`/products/${active.slug}`}
-                      className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full border border-line-strong px-6 text-sm font-semibold transition hover:border-electric-300"
+                      className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full border border-line-strong px-6 text-sm font-semibold transition hover:border-line-strong"
                     >
                       Explore {active.name} <ArrowUpRight size={16} aria-hidden />
                     </Link>
                   </div>
                   <div className="relative col-span-2">
-                    <ProductArt slug={active.slug} accent={active.accent} className="h-auto w-full" />
+                    <ProductArt slug={active.slug} className="h-auto w-full" />
                   </div>
                 </motion.div>
               </AnimatePresence>

@@ -2,7 +2,7 @@
   "name": "console-insurance",
   "version": "0.1.0",
   "private": true,
-  "description": "CONSOLE INSURANCE \u2014 next-generation digital insurance experience",
+  "description": "CONSOLE INSURANCE — next-generation digital insurance experience",
   "engines": {
     "node": ">=20.9.0"
   },
@@ -16,7 +16,8 @@
     "test:watch": "vitest",
     "verify": "npm run typecheck && npm run lint && npm run test && npm run build",
     "check:browser": "node scripts/browser-check.mjs",
-    "purge:dev-store": "node scripts/purge-submissions.mjs"
+    "purge:dev-store": "node scripts/purge-submissions.mjs",
+    "check:theme": "node scripts/theme-check.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "5.9.1",

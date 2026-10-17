@@ -37,21 +37,21 @@ export default function ClaimsPage() {
               <h2 id="how" className="h3">
                 Start by getting in touch
               </h2>
-              <p className="mt-3 text-mist">
+              <p className="mt-3 text-fg-2">
                 Every insurer has its own claims process. The quickest way to find out what applies to your policy is to
                 contact CONSOLE directly.
               </p>
               <ul className="mt-6 space-y-3 text-sm">
                 <li className="flex items-center gap-3">
-                  <Phone size={18} className="text-electric-300" aria-hidden />
-                  <PhoneText className="text-snow" />
+                  <Phone size={18} className="text-brand" aria-hidden />
+                  <PhoneText className="text-fg" />
                 </li>
                 <li className="flex items-center gap-3">
-                  <Mail size={18} className="shrink-0 text-electric-300" aria-hidden />
-                  <a className="break-all text-snow hover:underline" href={`mailto:${email.value}`}>{email.value}</a>
+                  <Mail size={18} className="shrink-0 text-brand" aria-hidden />
+                  <a className="break-all text-fg hover:underline" href={`mailto:${email.value}`}>{email.value}</a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <MapPin size={18} className="shrink-0 text-electric-300" aria-hidden />
+                  <MapPin size={18} className="shrink-0 text-brand" aria-hidden />
                   <span>{address.value}</span>
                 </li>
               </ul>
@@ -59,19 +59,19 @@ export default function ClaimsPage() {
 
             <Reveal delay={0.1} className="surface p-7">
               <h2 className="font-display text-lg tracking-[-0.02em]">Helpful to have ready</h2>
-              <p className="mt-1 text-xs text-steel">General guidance — your insurer confirms exactly what it needs.</p>
-              <ul className="mt-4 space-y-2 text-mist">
+              <p className="mt-1 text-xs text-fg-muted">General guidance — your insurer confirms exactly what it needs.</p>
+              <ul className="mt-4 space-y-2 text-fg-2">
                 {readyList.map((i) => (
                   <li key={i} className="flex gap-3">
-                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-electric-300" />
+                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
                     {i}
                   </li>
                 ))}
               </ul>
             </Reveal>
 
-            <Reveal delay={0.15} className="rounded-2xl border border-line p-6 text-sm text-mist">
-              <h2 className="font-semibold text-snow">About claim tracking</h2>
+            <Reveal delay={0.15} className="rounded-2xl border border-line p-6 text-sm text-fg-2">
+              <h2 className="font-semibold text-fg">About claim tracking</h2>
               <p className="mt-2">
                 This website doesn&apos;t include a claim-tracking portal, so it can&apos;t show the status of a claim.
                 To ask about an existing claim, contact the team using the details above or the form.

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 export const inputClass =
-  "w-full min-h-12 rounded-xl border border-line-strong bg-ink-850/70 px-4 py-3 text-base text-snow placeholder:text-steel transition-colors focus:border-electric-300 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric-300 aria-[invalid=true]:border-danger";
+  "w-full min-h-12 rounded-xl border border-field-line bg-field px-4 py-3 text-base text-fg placeholder:text-fg-muted transition-colors focus:border-brand focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-[invalid=true]:border-danger";
 
 type FieldProps = {
   id: string;
@@ -16,13 +16,13 @@ type FieldProps = {
 export function Field({ id, label, error, hint, optional, children }: FieldProps) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 flex items-baseline justify-between text-sm font-semibold text-silver">
+      <label htmlFor={id} className="mb-2 flex items-baseline justify-between text-sm font-semibold text-fg-2">
         <span>{label}</span>
-        {optional && <span className="text-xs font-normal text-steel">Optional</span>}
+        {optional && <span className="text-xs font-normal text-fg-muted">Optional</span>}
       </label>
       {children}
       {hint && !error && (
-        <p id={`${id}-hint`} className="mt-1.5 text-xs text-steel">
+        <p id={`${id}-hint`} className="mt-1.5 text-xs text-fg-muted">
           {hint}
         </p>
       )}

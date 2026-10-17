@@ -66,10 +66,10 @@ export default function HomePage() {
           </Reveal>
           <ol className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line md:grid-cols-3">
             {quoteSteps.map((s, i) => (
-              <Reveal as="li" key={s.n} delay={i * 0.1} className="bg-ink-900 p-8 sm:p-10">
-                <p className="font-display text-sm tracking-[0.2em] text-electric-300">{s.n}</p>
+              <Reveal as="li" key={s.n} delay={i * 0.1} className="bg-sunken p-8 sm:p-10">
+                <p className="font-display text-sm tracking-[0.2em] text-brand">{s.n}</p>
                 <h3 className="h3 mt-6">{s.title}</h3>
-                <p className="mt-3 text-mist">{s.body}</p>
+                <p className="mt-3 text-fg-2">{s.body}</p>
               </Reveal>
             ))}
           </ol>
@@ -89,19 +89,18 @@ export default function HomePage() {
             </p>
             <Link
               href="/about#founder"
-              className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full border border-line-strong px-6 text-sm font-semibold transition hover:border-electric-300"
+              className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full border border-line-strong px-6 text-sm font-semibold transition hover:border-line-strong"
             >
               Read his story <ArrowUpRight size={16} aria-hidden />
             </Link>
           </Reveal>
           <Reveal className="lg:col-span-5" delay={0.1}>
             <div className="surface relative overflow-hidden p-8 sm:p-10">
-              <div aria-hidden className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cobalt-500/25 blur-3xl" />
-              <ShieldCheck className="relative text-electric-300" size={28} aria-hidden />
+              <ShieldCheck className="relative text-brand" size={28} aria-hidden />
               <p className="relative mt-6 font-display text-2xl leading-snug tracking-[-0.02em]">
                 {company.tagline}
               </p>
-              <p className="relative mt-4 text-sm text-mist">— the idea CONSOLE is built around.</p>
+              <p className="relative mt-4 text-sm text-fg-2">— the idea CONSOLE is built around.</p>
             </div>
           </Reveal>
         </div>
@@ -120,7 +119,7 @@ export default function HomePage() {
               Contact the team and tell us what&apos;s happened. We&apos;ll explain what is needed and help you take the next
               step.
             </p>
-            <Link href="/claims" className="mt-8 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-electric-300">
+            <Link href="/claims" className="mt-8 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-brand">
               Go to Claims <ArrowUpRight size={16} aria-hidden />
             </Link>
           </Reveal>

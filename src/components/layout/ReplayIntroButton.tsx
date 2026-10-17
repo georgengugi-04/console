@@ -7,7 +7,7 @@ export function ReplayIntroButton() {
     <button
       type="button"
       onClick={() => window.dispatchEvent(new Event(REPLAY_EVENT))}
-      className="underline-offset-4 transition hover:text-white hover:underline"
+      className="underline-offset-4 transition hover:text-fg hover:underline"
     >
       Replay introduction
     </button>

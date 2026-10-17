@@ -63,11 +63,11 @@ export function ContactForm() {
         <textarea id="c-message" rows={6} maxLength={2000} className={inputClass} aria-invalid={Boolean(errors.message)} aria-describedby={describedBy("c-message", errors.message?.message, "hint")} {...register("message")} />
       </Field>
       <div>
-        <label className="flex cursor-pointer items-start gap-3 text-sm text-mist">
-          <input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-[#4da3ff]" aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "c-consent-error" : undefined} {...register("consent")} />
+        <label className="flex cursor-pointer items-start gap-3 text-sm text-fg-2">
+          <input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-brand" aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "c-consent-error" : undefined} {...register("consent")} />
           <span>
             I agree that CONSOLE INSURANCE may use these details to reply to me, as described in the{" "}
-            <a href="/privacy" target="_blank" rel="noopener" className="text-electric-300 underline underline-offset-4">
+            <a href="/privacy" target="_blank" rel="noopener" className="text-brand underline underline-offset-4">
               privacy notice
             </a>
             .
