@@ -32,5 +32,8 @@ The on-site logo mark, intro, transition motif, favicon and OG card are recolour
 `--color-swoosh-*`). The supplied PNG logo has a blue swoosh: if the brand must keep blue, change only those four tokens.
 Hero scene colours per theme live in `src/components/three/scenePalette.ts` (geometry and animation untouched).
 
+## Imagery
+Section imagery is `<Scene name="…">` (src/components/art/Scene.tsx): original illustrated scenery (land, hills, home, road, family, health) drawn with the theme tokens, used as page-hero backdrops, the CTA band, product-page pictures and home sections. To use real photos, add files to `public/images` and map them in `src/content/imagery.ts` (only photos CONSOLE owns or is licensed to use).
+
 ## Verifying
 `npm run verify` (types, lint, tests incl. token contrast), then with a running build `npm run check:theme` and `npm run check:browser`.

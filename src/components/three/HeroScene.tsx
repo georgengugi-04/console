@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, Lightformer, Sparkles } from "@react-three/drei";
+import { Environment, Lightformer } from "@react-three/drei";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import type { Theme } from "@/lib/theme";
@@ -100,64 +100,6 @@ function Shield({ p }: { p: ScenePalette }) {
         <meshStandardMaterial color={p.swoosh} emissive={p.swooshEmissive} emissiveIntensity={p.swooshGlow} roughness={0.3} metalness={0.2} />
       </mesh>
     </group>
-  );
-}
-
-/* ── protective boundary: instanced pillars that rise on load ── */
-function Pillars({ count, radius, instant, p }: { count: number; radius: number; instant: boolean; p: ScenePalette }) {
-  const mesh = useRef<THREE.InstancedMesh>(null);
-  const invalidate = useThree((s) => s.invalidate);
-  const dummy = useMemo(() => new THREE.Object3D(), []);
-  const heights = useMemo(
-    () => Array.from({ length: count }, (_, i) => 0.28 + 0.34 + (Math.sin(i * 1.7) + Math.sin(i * 0.63 + 1)) * 0.2),
-    [count],
-  );
-  const base = -1.55;
-
-  const apply = (elapsed: number) => {
-    const m = mesh.current;
-    if (!m) return;
-    for (let i = 0; i < count; i++) {
-      const a = (i / count) * Math.PI * 2;
-      const k = ease((elapsed - 0.5 - i * 0.025) / 1.3);
-      const h = Math.max(0.0001, heights[i]! * k);
-      dummy.position.set(Math.cos(a) * radius, base + h / 2, Math.sin(a) * radius);
-      dummy.rotation.set(0, -a, 0);
-      dummy.scale.set(1, h, 1);
-      dummy.updateMatrix();
-      m.setMatrixAt(i, dummy.matrix);
-    }
-    m.instanceMatrix.needsUpdate = true;
-  };
-
-  useEffect(() => {
-    const m = mesh.current;
-    if (!m) return;
-    const c = new THREE.Color();
-    const hi = new THREE.Color(p.pillarB);
-    for (let i = 0; i < count; i++) {
-      c.set(p.pillarA).lerp(hi, (heights[i]! - 0.3) / 0.7);
-      m.setColorAt(i, c);
-    }
-    if (m.instanceColor) m.instanceColor.needsUpdate = true;
-    if (instant) apply(99);
-    invalidate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count, instant, p]);
-
-  const done = useRef(false);
-  useFrame((state) => {
-    if (instant || done.current) return;
-    const t = state.clock.elapsedTime;
-    apply(t);
-    if (t > count * 0.025 + 2.2) done.current = true;
-  });
-
-  return (
-    <instancedMesh ref={mesh} args={[undefined, undefined, count]} frustumCulled={false}>
-      <boxGeometry args={[0.05, 1, 0.05]} />
-      <meshStandardMaterial color="#ffffff" emissive={p.pillarEmissive} emissiveIntensity={p.pillarGlow} roughness={0.35} metalness={0.4} />
-    </instancedMesh>
   );
 }
 
@@ -371,13 +313,11 @@ export default function HeroScene({ theme, active, reduced, compact, wide, onRea
         <Rig reduced={reduced} compact={compact}>
           <group rotation-x={-0.05}>
             <Shield p={p} />
-            <Pillars count={compact ? 28 : 56} radius={radius} instant={reduced} p={p} />
             <Rings radius={radius} p={p} />
             <LifeObjects radius={radius} p={p} />
           </group>
         </Rig>
       </Stage>
-      {!compact && !reduced && <Sparkles count={46} scale={[9, 5, 9]} size={2.2} speed={0.25} opacity={p.sparkleOpacity} color={p.sparkle} />}
     </Canvas>
   );
 }

@@ -22,7 +22,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageHero
+      <PageHero scene="home"
         eyebrow="Contact"
         title="Let's start a conversation."
         lead="Call, email or send a message. We'll reply to the details you give us."

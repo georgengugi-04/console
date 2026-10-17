@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function QuotePage() {
   return (
     <>
-      <PageHero
+      <PageHero scene="family"
         eyebrow="Get a quote"
         title="Tell us what you'd like to protect."
         lead="A few quick details and the CONSOLE team will get in touch. This form doesn't calculate prices — a team member follows up."

@@ -24,7 +24,7 @@ export default function ClaimsPage() {
   const { email, address } = company.contact;
   return (
     <>
-      <PageHero
+      <PageHero scene="road"
         eyebrow="Claims & support"
         title="We're here to help you move forward."
         lead="Tell us what's happened and the team will explain what's needed and what to do next."

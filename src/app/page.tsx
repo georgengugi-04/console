@@ -5,6 +5,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { Explorer } from "@/components/sections/Explorer";
 import { Hero } from "@/components/sections/Hero";
 import { ProtectionStory } from "@/components/sections/ProtectionStory";
+import { Scene } from "@/components/art/Scene";
 import { Reveal } from "@/components/motion/Reveal";
 import { company, siteUrl } from "@/content/company";
 import { founder } from "@/content/founder";
@@ -95,18 +96,22 @@ export default function HomePage() {
             </Link>
           </Reveal>
           <Reveal className="lg:col-span-5" delay={0.1}>
-            <div className="surface relative overflow-hidden p-8 sm:p-10">
+            <div className="surface relative overflow-hidden">
+              <Scene name="family" className="relative h-44 w-full" />
+              <div className="p-8 sm:p-10">
               <ShieldCheck className="relative text-brand" size={28} aria-hidden />
               <p className="relative mt-6 font-display text-2xl leading-snug tracking-[-0.02em]">
                 {company.tagline}
               </p>
               <p className="relative mt-4 text-sm text-fg-2">— the idea CONSOLE is built around.</p>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section aria-labelledby="claims-teaser" className="section hairline-t">
+      <section aria-labelledby="claims-teaser" className="section hairline-t relative overflow-hidden">
+        <Scene name="road" mode="backdrop" className="pointer-events-none absolute inset-0" />
         <div className="container-x grid grid-cols-1 gap-10 lg:grid-cols-12">
           <Reveal className="lg:col-span-6">
             <p className="eyebrow">Claims &amp; support</p>

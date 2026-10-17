@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Scene } from "@/components/art/Scene";
 import { HeroVisual } from "@/components/three/HeroVisual";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { SplitText } from "@/components/motion/SplitText";
@@ -8,7 +9,7 @@ import { company } from "@/content/company";
 export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="atmosphere relative isolate overflow-hidden">
-      <div className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+      <Scene name="land" mode="backdrop" className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[55%] opacity-80" />
 
       <div className="container-x relative grid grid-cols-1 min-h-[100svh] items-center gap-0 pb-12 pt-28 lg:grid-cols-12 lg:pb-0 lg:pt-0">
         {/* 3D scene: sits behind copy on desktop, above it on mobile. Never blocks the actions. */}

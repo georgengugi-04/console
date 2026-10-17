@@ -14,7 +14,7 @@ export default function ResourcesPage() {
   const categories = Array.from(new Set(resources.map((r) => r.category))) as ResourceCategory[];
   return (
     <>
-      <PageHero
+      <PageHero scene="hills"
         eyebrow="Resources"
         title="Clear answers, in plain language."
         lead="Short guides to help you ask better questions. Articles marked Draft are placeholders pending review by CONSOLE."

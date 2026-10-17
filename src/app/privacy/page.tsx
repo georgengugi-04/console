@@ -14,7 +14,7 @@ const retention = process.env.SUBMISSION_RETENTION_DAYS ?? "180";
 export default function PrivacyPage() {
   return (
     <>
-      <PageHero eyebrow="Privacy & data" title="Your information, handled with care." />
+      <PageHero scene="hills" eyebrow="Privacy & data" title="Your information, handled with care." />
       <section className="section pt-4">
         <div className="container-x max-w-3xl">
           <p className="rounded-xl border border-dashed border-brand/50 bg-brand-soft p-4 text-sm text-brand">

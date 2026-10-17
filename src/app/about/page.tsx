@@ -29,7 +29,7 @@ const pillars = [
 export default function AboutPage() {
   return (
     <>
-      <PageHero
+      <PageHero scene="hills"
         eyebrow="About CONSOLE"
         title="Thoughtful protection for the life you're building."
         lead="The people and purpose behind CONSOLE INSURANCE."

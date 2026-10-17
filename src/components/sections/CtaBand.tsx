@@ -1,3 +1,4 @@
+import { Scene } from "@/components/art/Scene";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Reveal } from "@/components/motion/Reveal";
 import { LinkButton } from "@/components/ui/Button";
@@ -11,7 +12,7 @@ export function CtaBand({
 }) {
   return (
     <section aria-label="Next step" className="section relative overflow-hidden">
-      <div aria-hidden className="pointer-events-none absolute inset-0 atmosphere opacity-70" />
+      <Scene name="hills" mode="backdrop" className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5" />
       <div className="container-x relative">
         <Reveal className="surface mx-auto max-w-5xl overflow-hidden px-6 py-14 text-center sm:px-14 sm:py-20">
           <h2 className="h1 text-balance">{title}</h2>

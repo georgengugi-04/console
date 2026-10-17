@@ -6,6 +6,8 @@ import { Magnetic } from "@/components/motion/Magnetic";
 import { Reveal } from "@/components/motion/Reveal";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero } from "@/components/sections/PageHero";
+import { Scene } from "@/components/art/Scene";
+import type { SceneName } from "@/content/imagery";
 import { ProductArt } from "@/components/sections/ProductArt";
 import { LinkButton } from "@/components/ui/Button";
 import { availableProducts, getProduct } from "@/content/products";
@@ -27,6 +29,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
+const productScene: Record<string, SceneName> = { life: "family", health: "health", motor: "road", property: "home", business: "hills" };
+
 export default async function ProductPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const product = getProduct(slug);
@@ -35,7 +39,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
   return (
     <>
-      <PageHero eyebrow={`${product.code} · ${product.name}`} title={product.headline} lead={product.short}>
+      <PageHero scene={productScene[product.slug]} eyebrow={`${product.code} · ${product.name}`} title={product.headline} lead={product.short}>
         <div className="mt-10 flex flex-wrap gap-4">
           <Magnetic>
             <LinkButton href={`/quote?product=${product.slug}`}>
@@ -61,8 +65,11 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             </div>
           </Reveal>
           <Reveal className="lg:col-span-5" delay={0.1}>
-            <div className="surface grid place-items-center p-10">
-              <ProductArt slug={product.slug} className="h-auto w-full max-w-xs" />
+            <div className="surface relative grid aspect-[4/3] place-items-center overflow-hidden">
+              <Scene name={productScene[product.slug] ?? "hills"} className="absolute inset-0" />
+              <div className="relative grid h-2/3 aspect-square place-items-center rounded-full bg-surface/85 p-6 shadow-card">
+                <ProductArt slug={product.slug} className="h-full w-auto" />
+              </div>
             </div>
           </Reveal>
         </div>

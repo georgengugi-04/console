@@ -20,7 +20,7 @@ export default function ProductsPage() {
   const [lead, ...rest] = availableProducts;
   return (
     <>
-      <PageHero
+      <PageHero scene="road"
         eyebrow="Insurance products"
         title="Protection for what matters."
         lead="Four areas of life, explained simply. Choose one to read more, or let the explorer point you somewhere to start."

@@ -1,12 +1,16 @@
 import type { ReactNode } from "react";
+import { Scene } from "@/components/art/Scene";
+import type { SceneName } from "@/content/imagery";
 import { SplitText } from "@/components/motion/SplitText";
 
 export function PageHero({
   eyebrow,
   title,
   lead,
+  scene = "hills",
   children,
 }: {
+  scene?: SceneName;
   eyebrow: string;
   title: string;
   lead?: string;
@@ -14,7 +18,7 @@ export function PageHero({
 }) {
   return (
     <header className="atmosphere relative overflow-hidden pb-12 pt-36 sm:pb-20 sm:pt-44">
-      <div aria-hidden className="grid-lines pointer-events-none absolute inset-0" />
+      <Scene name={scene} mode="backdrop" className="pointer-events-none absolute inset-0 opacity-90" />
       <div className="container-x relative">
         <p className="eyebrow mb-5">{eyebrow}</p>
         <h1 className="h1 max-w-5xl text-balance">
