@@ -1,0 +1,319 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   CONSOLE INSURANCE — design tokens
+   Direction: midnight navy surfaces, cobalt/electric interaction colour,
+   cool-white type, silver hairlines. Light is used sparingly and on purpose.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --font-display: var(--font-unbounded), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* surfaces */
+  --color-ink-950: #02050d;
+  --color-ink-900: #050a18;
+  --color-ink-850: #081022;
+  --color-ink-800: #0b1530;
+  --color-ink-700: #111f42;
+  --color-ink-600: #1a2c58;
+
+  /* interaction */
+  --color-cobalt-600: #1747d6;
+  --color-cobalt-500: #2563ff;
+  --color-cobalt-400: #3d7bff;
+  --color-electric-400: #4da3ff;
+  --color-electric-300: #7cc0ff;
+
+  /* type */
+  --color-snow: #f2f6ff;
+  --color-silver: #c9d3ea;
+  --color-mist: #b4c0dc;
+  --color-steel: #8491b0;
+
+  --color-line: rgba(150, 185, 255, 0.14);
+  --color-line-strong: rgba(150, 185, 255, 0.28);
+  --color-danger: #ff7a8a;
+  --color-ok: #5fe3b1;
+
+  /* radii */
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
+
+  /* shadows */
+  --shadow-glow: 0 0 0 1px rgba(125, 170, 255, 0.18), 0 24px 70px -28px rgba(37, 99, 255, 0.55);
+  --shadow-lift: 0 30px 80px -40px rgba(0, 0, 0, 0.8);
+
+  /* motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* type scale (fluid) */
+  --text-display: clamp(2.6rem, 1.2rem + 6.4vw, 7rem);
+  --text-h1: clamp(2.2rem, 1.2rem + 4.2vw, 4.75rem);
+  --text-h2: clamp(1.75rem, 1.1rem + 2.6vw, 3.25rem);
+  --text-h3: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+}
+
+:root {
+  color-scheme: dark;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --header-h: 4.5rem;
+}
+
+html {
+  background: var(--color-ink-950);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+body {
+  background: var(--color-ink-950);
+  color: var(--color-snow);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-cobalt-500);
+  color: #fff;
+}
+
+/* Focus: always visible, never colour-only (WCAG 2.2 AA 2.4.7 / 2.4.11) */
+:focus-visible {
+  outline: 2px solid var(--color-electric-300);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── layout helpers ─────────────────────────────────────────── */
+.container-x {
+  width: 100%;
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-electric-300);
+}
+
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-size: var(--text-display);
+}
+.h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-size: var(--text-h1);
+}
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.028em;
+  font-size: var(--text-h2);
+}
+.h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-size: var(--text-h3);
+}
+
+.lead {
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
+  line-height: 1.6;
+  color: var(--color-mist);
+  max-width: 46ch;
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #fff 10%, var(--color-electric-300) 55%, var(--color-cobalt-400) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── surfaces ───────────────────────────────────────────────── */
+.surface {
+  background: linear-gradient(180deg, rgba(17, 31, 66, 0.55), rgba(8, 16, 34, 0.55));
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--color-line);
+}
+
+/* Atmosphere: soft cobalt light + faint grid. Static, no GPU cost. */
+.atmosphere {
+  background:
+    radial-gradient(60rem 40rem at 78% -10%, rgba(37, 99, 255, 0.22), transparent 60%),
+    radial-gradient(40rem 30rem at -10% 40%, rgba(77, 163, 255, 0.1), transparent 60%),
+    var(--color-ink-950);
+}
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(150, 185, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 185, 255, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+}
+
+/* Spotlight card (pattern adapted from ReactBits "Spotlight Card") */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(77, 163, 255, 0.16), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-expo);
+  pointer-events: none;
+  z-index: -1;
+}
+.spotlight:hover::before,
+.spotlight:focus-within::before {
+  opacity: 1;
+}
+
+/* Animated border (pattern adapted from ReactBits "Star Border") */
+@property --beam-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.beam-border {
+  position: relative;
+  border-radius: var(--radius-pill);
+}
+.beam-border::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--beam-angle), transparent 0 70%, var(--color-electric-300) 85%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beam 5s linear infinite;
+  pointer-events: none;
+}
+@keyframes beam {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+/* One-time intro cover: the inline head script sets html[data-intro="pending"] for first-time visitors,
+   so there is no flash of the page before the intro mounts. A CSS timer guarantees the cover can never
+   become permanent if JavaScript fails. */
+html[data-intro="pending"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--color-ink-950);
+  animation: introCoverFailsafe 0.01s 5s forwards;
+}
+@keyframes introCoverFailsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+html[data-intro="pending"] body {
+  overflow: hidden;
+}
+
+/* Hero SVG fallback shimmer */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.floaty {
+  animation: floaty 7s ease-in-out infinite;
+}
+
+/* utilities */
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Prose for articles / legal */
+.prose-console h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.6rem;
+}
+.prose-console p {
+  color: var(--color-mist);
+  margin-top: 0.9rem;
+  max-width: 68ch;
+}
+.prose-console ul {
+  margin-top: 0.9rem;
+  padding-left: 1.2rem;
+  list-style: disc;
+  color: var(--color-mist);
+  max-width: 68ch;
+}
+.prose-console li + li {
+  margin-top: 0.35rem;
+}
+.prose-console a {
+  color: var(--color-electric-300);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
