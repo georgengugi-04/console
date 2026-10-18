@@ -5,6 +5,8 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { Explorer } from "@/components/sections/Explorer";
 import { Hero } from "@/components/sections/Hero";
 import { ProtectionStory } from "@/components/sections/ProtectionStory";
+import { Photo } from "@/components/art/Photo";
+import { stockPhotos } from "@/content/imagery";
 import { Scene } from "@/components/art/Scene";
 import { Reveal } from "@/components/motion/Reveal";
 import { company, siteUrl } from "@/content/company";
@@ -38,6 +40,48 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <Hero />
       <ProtectionStory />
+
+      <section aria-labelledby="places-title" className="section hairline-t">
+        <div className="container-x">
+          <Reveal className="max-w-3xl">
+            <p className="eyebrow">Rooted in Subukia, Nakuru</p>
+            <h2 id="places-title" className="h2 mt-4 text-balance">
+              Cover for the things that matter to you.
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-12">
+            <Reveal className="lg:col-span-12">
+              <Photo id="land" priority={false} sizes="100vw" width={1800} className="h-64 w-full rounded-[var(--radius-card)] sm:h-80 lg:h-[26rem]" />
+            </Reveal>
+            {([
+              ["family", "Life insurance", "/products/life"],
+              ["health", "Health insurance", "/products/health"],
+              ["road", "Motor insurance", "/products/motor"],
+              ["home", "Property insurance", "/products/property"],
+            ] as const).map(([id, label, href], i) => (
+              <Reveal key={id} delay={i * 0.07} className="sm:col-span-6 lg:col-span-3">
+                <Link href={href} className="group block">
+                  <Photo id={id} credit={false} sizes="(min-width: 1024px) 25vw, 50vw" width={800} className="aspect-[4/3] w-full rounded-[var(--radius-card)]" />
+                  <p className="mt-4 flex items-center justify-between font-display text-lg tracking-[-0.02em]">
+                    {label}
+                    <ArrowUpRight size={18} aria-hidden className="text-brand transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </p>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-fg-muted">
+            Photos via{" "}
+            <a className="underline underline-offset-2" href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>:{" "}
+            {Object.values(stockPhotos).map((ph, i, all) => (
+              <span key={ph.page}>
+                <a className="underline underline-offset-2" href={ph.page} target="_blank" rel="noopener noreferrer">{ph.by}</a>
+                {i < all.length - 1 ? ", " : "."}
+              </span>
+            ))}
+          </p>
+        </div>
+      </section>
 
       <section aria-labelledby="explorer-title" className="section relative">
         <div className="container-x grid grid-cols-1 items-start gap-12 lg:grid-cols-12">

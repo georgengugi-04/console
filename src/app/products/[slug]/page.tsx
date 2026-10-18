@@ -6,8 +6,8 @@ import { Magnetic } from "@/components/motion/Magnetic";
 import { Reveal } from "@/components/motion/Reveal";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero } from "@/components/sections/PageHero";
-import { Scene } from "@/components/art/Scene";
-import type { SceneName } from "@/content/imagery";
+import { Photo } from "@/components/art/Photo";
+import type { PhotoId, SceneName } from "@/content/imagery";
 import { ProductArt } from "@/components/sections/ProductArt";
 import { LinkButton } from "@/components/ui/Button";
 import { availableProducts, getProduct } from "@/content/products";
@@ -65,10 +65,11 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             </div>
           </Reveal>
           <Reveal className="lg:col-span-5" delay={0.1}>
-            <div className="surface relative grid aspect-[4/3] place-items-center overflow-hidden">
-              <Scene name={productScene[product.slug] ?? "hills"} className="absolute inset-0" />
-              <div className="relative grid h-2/3 aspect-square place-items-center rounded-full bg-surface/85 p-6 shadow-card">
-                <ProductArt slug={product.slug} className="h-full w-auto" />
+            <div className="surface overflow-hidden">
+              <Photo id={(productScene[product.slug] === "hills" ? "land" : productScene[product.slug]) as PhotoId} className="aspect-[4/3] w-full" />
+              <div className="flex items-center gap-4 p-5">
+                <ProductArt slug={product.slug} className="h-14 w-auto shrink-0" />
+                <p className="text-sm text-fg-2">{product.short}</p>
               </div>
             </div>
           </Reveal>

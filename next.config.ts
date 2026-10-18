@@ -13,7 +13,7 @@ const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://images.unsplash.com",
   "font-src 'self' data:",
   "connect-src 'self'",
   "worker-src 'self' blob:",

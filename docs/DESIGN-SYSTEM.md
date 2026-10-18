@@ -33,7 +33,7 @@ The on-site logo mark, intro, transition motif, favicon and OG card are recolour
 Hero scene colours per theme live in `src/components/three/scenePalette.ts` (geometry and animation untouched).
 
 ## Imagery
-Section imagery is `<Scene name="…">` (src/components/art/Scene.tsx): original illustrated scenery (land, hills, home, road, family, health) drawn with the theme tokens, used as page-hero backdrops, the CTA band, product-page pictures and home sections. To use real photos, add files to `public/images` and map them in `src/content/imagery.ts` (only photos CONSOLE owns or is licensed to use).
+Section imagery is `<Scene name="…">` (src/components/art/Scene.tsx): original illustrated scenery (land, hills, home, road, family, health) drawn with the theme tokens, used as page-hero backdrops, the CTA band, product-page pictures and home sections. Real photographs use `<Photo id="…">` (src/components/art/Photo.tsx), data in `stockPhotos` in `src/content/imagery.ts`: free-licence Unsplash photos hotlinked from images.unsplash.com (allowed in the CSP `img-src`), credited under each photo, falling back to the matching illustration if they fail to load. Review each photo visually before launch; to use CONSOLE's own photography, put files in `public/images` and point `src` there.
 
 ## Verifying
 `npm run verify` (types, lint, tests incl. token contrast), then with a running build `npm run check:theme` and `npm run check:browser`.

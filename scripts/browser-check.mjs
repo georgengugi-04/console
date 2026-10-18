@@ -23,9 +23,9 @@ async function session(label, ctxOpts) {
   const page = await ctx.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
-  page.on("console", (m) => { if (m.type() === "error" && !/status of 503/.test(m.text())) errors.push("console: " + m.text()); });
+  page.on("console", (m) => { if (m.type() === "error" && !/status of 503|ERR_TUNNEL_CONNECTION_FAILED/.test(m.text())) errors.push("console: " + m.text()); });
   // Next.js aborts in-flight RSC prefetches when navigation supersedes them — expected, not an error.
-  page.on("requestfailed", (r) => { if (!/_rsc=|icon\.svg/.test(r.url())) errors.push("requestfailed: " + r.url() + " " + r.failure()?.errorText); });
+  page.on("requestfailed", (r) => { if (!/_rsc=|icon\.svg|images\.unsplash\.com/.test(r.url())) errors.push("requestfailed: " + r.url() + " " + r.failure()?.errorText); });
   return { ctx, page, errors, label };
 }
 

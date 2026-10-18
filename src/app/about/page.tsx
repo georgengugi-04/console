@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { Photo } from "@/components/art/Photo";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
@@ -42,6 +43,9 @@ export default function AboutPage() {
               <span className="text-gradient">{company.tagline}</span> It&apos;s not a slogan so much as a starting
               point: protection only matters if it&apos;s there when tomorrow arrives.
             </h2>
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-4">
+            <Photo id="land" width={900} className="aspect-[4/3] w-full rounded-[var(--radius-card)]" />
           </Reveal>
         </div>
 
